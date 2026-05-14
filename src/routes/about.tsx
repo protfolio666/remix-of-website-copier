@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Placeholder } from "@/components/placeholder";
+import portrait from "@/assets/portrait.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Your Name" },
-      { name: "description", content: "About the designer behind the work." },
+      { title: "About — Abhishek Das" },
+      { name: "description", content: "About Abhishek Das, designer and developer." },
     ],
   }),
   component: AboutPage,
@@ -32,23 +32,31 @@ function AboutPage() {
       <section className="px-6 py-32 lg:px-12">
         <div className="mx-auto grid max-w-[1800px] gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Placeholder label="Portrait" aspect="3/4" />
+            <img
+              src={portrait}
+              alt="Abhishek Das"
+              loading="lazy"
+              width={1280}
+              height={1600}
+              className="w-full object-cover"
+              style={{ aspectRatio: "3/4" }}
+            />
           </div>
           <div className="space-y-8 lg:col-span-6 lg:col-start-7">
             <p className="text-2xl leading-snug">
-              Replace this paragraph with your story — where you started, what you do now, what you care about.
+              I'm Abhishek Das. I design and build digital products with a focus on craft, motion, and the feel of an interface — not just the function.
             </p>
             <p className="text-base text-muted-foreground">
-              Add a second paragraph for context: tools you love, the kind of collaborators you work best with, and what a typical engagement looks like.
+              For five years I've worked across brand identity, product design, and frontend engineering, partnering with founders, studios, and in-house teams who care about the details.
             </p>
             <p className="text-base text-muted-foreground">
-              A third paragraph can talk about beliefs, process, or the through-line in your work — keep it human.
+              The work tends to live where editorial meets product — typography-led, image-driven, and quietly cinematic. If that resonates, let's talk.
             </p>
 
             <div className="grid grid-cols-2 gap-8 border-t border-border pt-8">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Based in</p>
-                <p className="mt-2 font-display text-2xl">City, Country</p>
+                <p className="mt-2 font-display text-2xl">Kolkata, IN</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Available</p>
@@ -66,8 +74,8 @@ function AboutPage() {
           <div className="mt-16 grid gap-px bg-border md:grid-cols-3">
             {[
               { t: "Brand Identity", d: "Logos, systems, guidelines, art direction." },
-              { t: "Web & Interactive", d: "Sites, apps, prototypes, motion." },
-              { t: "Product Design", d: "UI/UX, design systems, research." },
+              { t: "Web & Interactive", d: "Sites, apps, prototypes, motion design." },
+              { t: "Product Design", d: "UI/UX, design systems, frontend engineering." },
             ].map((s) => (
               <div key={s.t} className="bg-surface p-10">
                 <h3 className="font-display text-3xl">{s.t}</h3>

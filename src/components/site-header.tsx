@@ -30,7 +30,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex max-w-[1800px] items-center justify-between px-6 py-5 lg:px-12">
         <Link to="/" className="font-display text-2xl tracking-tight">
-          PORT<span className="text-accent">·</span>FOLIO
+          ABHISHEK<span className="text-accent">·</span>DAS
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

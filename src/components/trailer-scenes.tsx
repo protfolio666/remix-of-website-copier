@@ -9,9 +9,9 @@ import scene3 from "@/assets/scene-3.jpg";
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const scenes = [
-  { img: scene1, eyebrow: "Chapter I", title: "Build the world.", body: "Brand systems and identities for ambitious teams." },
-  { img: scene2, eyebrow: "Chapter II", title: "Ship the craft.", body: "Production-ready interfaces, animation, and code." },
-  { img: scene3, eyebrow: "Chapter III", title: "Set the mood.", body: "Direction and storytelling that lingers." },
+  { img: scene1, eyebrow: "Chapter I — Trust & Safety", title: "Find the fraud pattern.", body: "Investigate seller abuse, COD scam patterns, and operational leakage before they scale into trust damage." },
+  { img: scene2, eyebrow: "Chapter II — Audit Governance", title: "Close the loophole.", body: "Identify tagging gaps, false metrics, and incentive leakage that hide real operational risk." },
+  { img: scene3, eyebrow: "Chapter III — CX Workflow", title: "Build the system.", body: "Design workflows for escalation visibility, ownership, and resolution accountability across teams." },
 ];
 
 /**

@@ -7,8 +7,8 @@ export function SiteFooter() {
         <div className="grid gap-12 pb-16 md:grid-cols-3">
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Get in touch</p>
-            <a href="mailto:hello@abhishekdas.com" className="mt-4 block font-display text-3xl hover:text-accent">
-              hello@abhishekdas.com
+            <a href="mailto:abhishek@solvextra.com" className="mt-4 block font-display text-3xl hover:text-accent">
+              abhishek@solvextra.com
             </a>
           </div>
           <div>
@@ -17,7 +17,7 @@ export function SiteFooter() {
               {[
                 { to: "/" as const, label: "Index" },
                 { to: "/about" as const, label: "About" },
-                { to: "/work" as const, label: "Work" },
+                { to: "/work" as const, label: "Case Studies" },
                 { to: "/experience" as const, label: "Experience" },
                 { to: "/contact" as const, label: "Contact" },
               ].map((l) => (
@@ -32,10 +32,9 @@ export function SiteFooter() {
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Elsewhere</p>
             <ul className="mt-4 space-y-2 text-sm">
-              <li><a href="#" className="hover:text-accent">Instagram</a></li>
-              <li><a href="#" className="hover:text-accent">Twitter / X</a></li>
-              <li><a href="#" className="hover:text-accent">LinkedIn</a></li>
-              <li><a href="#" className="hover:text-accent">GitHub</a></li>
+              <li><a href="https://linkedin.com/in/abhi003" target="_blank" rel="noreferrer" className="hover:text-accent">LinkedIn</a></li>
+              <li><a href="mailto:abhishek@solvextra.com" className="hover:text-accent">Email</a></li>
+              <li><span className="text-muted-foreground">India</span></li>
             </ul>
           </div>
         </div>

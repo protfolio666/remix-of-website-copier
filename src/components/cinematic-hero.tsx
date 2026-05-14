@@ -61,7 +61,7 @@ export function CinematicHero() {
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex-1 px-6 pt-32 lg:px-12 text-center">
           <p className="hero-eyebrow text-xs uppercase tracking-[0.4em] text-accent will-change-transform">
-            Folio · 2026
+            Operations Intelligence · Trust & Safety · CX Governance
           </p>
         </div>
 
@@ -72,20 +72,27 @@ export function CinematicHero() {
           </h1>
 
           <div className="hero-meta mt-8 flex flex-wrap items-end justify-between gap-6 border-t border-foreground/20 pt-6 will-change-transform">
-            <p className="max-w-md text-sm text-muted-foreground">
-              Designer & developer building cinematic digital experiences. Scroll — the trailer plays as you go.
+            <p className="max-w-xl text-sm text-muted-foreground">
+              I investigate operational problems, fraud patterns, audit loopholes, and workflow failures — then design systems that improve visibility, accountability, and customer experience.
             </p>
-            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em]">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
-              Available 2026
+            <div className="flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-[0.25em]">
+              {["3.5+ Yrs", "9000+ Audits", "Fraud Investigations", "Workflow Systems"].map((s) => (
+                <span key={s} className="border border-foreground/30 px-3 py-1.5">{s}</span>
+              ))}
             </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.3em]">
+            <a href="/work" className="border border-foreground bg-foreground text-background px-5 py-3 hover:bg-accent hover:border-accent">View Case Studies →</a>
+            <a href="#" className="border border-foreground/40 px-5 py-3 hover:border-accent hover:text-accent">Download Resume</a>
+            <a href="/contact" className="border border-foreground/40 px-5 py-3 hover:border-accent hover:text-accent">Contact Me</a>
           </div>
         </div>
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-6 text-center">
         <p className="hero-tagline font-display text-fluid-display max-w-5xl opacity-0 will-change-transform">
-          A portfolio that <span className="text-accent">moves</span>.
+          Find the <span className="text-accent">gap</span>. Fix the system.
         </p>
       </div>
     </section>

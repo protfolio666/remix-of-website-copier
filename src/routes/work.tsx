@@ -1,24 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Placeholder } from "@/components/placeholder";
+import project1 from "@/assets/project-1.jpg";
+import project2 from "@/assets/project-2.jpg";
+import project3 from "@/assets/project-3.jpg";
+import project4 from "@/assets/project-4.jpg";
+import scene1 from "@/assets/scene-1.jpg";
+import scene3 from "@/assets/scene-3.jpg";
 
 export const Route = createFileRoute("/work")({
   head: () => ({
     meta: [
-      { title: "Work — Your Name" },
-      { name: "description", content: "Selected projects." },
+      { title: "Work — Abhishek Das" },
+      { name: "description", content: "Selected projects by Abhishek Das." },
     ],
   }),
   component: WorkPage,
 });
 
 const projects = [
-  { slug: "project-one", title: "Project One", role: "Brand Identity", year: "2025" },
-  { slug: "project-two", title: "Project Two", role: "Website", year: "2024" },
-  { slug: "project-three", title: "Project Three", role: "Product Design", year: "2024" },
-  { slug: "project-four", title: "Project Four", role: "Visual Identity", year: "2023" },
-  { slug: "project-five", title: "Project Five", role: "Art Direction", year: "2023" },
-  { slug: "project-six", title: "Project Six", role: "Editorial", year: "2022" },
+  { slug: "project-one", title: "Aurora OS", role: "Product Design", year: "2025", image: project1 },
+  { slug: "project-two", title: "Noir Studio", role: "Brand Identity", year: "2024", image: project2 },
+  { slug: "project-three", title: "Halo App", role: "Mobile Product", year: "2024", image: project3 },
+  { slug: "project-four", title: "Edition 03", role: "Editorial", year: "2023", image: project4 },
+  { slug: "project-five", title: "Vector City", role: "Art Direction", year: "2023", image: scene1 },
+  { slug: "project-six", title: "Sundown", role: "Campaign", year: "2022", image: scene3 },
 ];
 
 function WorkPage() {
@@ -51,9 +56,15 @@ function WorkPage() {
             >
               <Link to="/case/$slug" params={{ slug: p.slug }} className="group block">
                 <div className="overflow-hidden">
-                  <div className="transition-transform duration-700 group-hover:scale-105">
-                    <Placeholder label={p.title} aspect={i % 3 === 0 ? "4/5" : "3/2"} />
-                  </div>
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    loading="lazy"
+                    width={1536}
+                    height={1920}
+                    className="w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105"
+                    style={{ aspectRatio: i % 3 === 0 ? "4/5" : "3/2" }}
+                  />
                 </div>
                 <div className="mt-6 flex items-end justify-between gap-6">
                   <div>

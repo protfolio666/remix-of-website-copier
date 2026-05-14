@@ -269,7 +269,7 @@ export const Route = createFileRoute("/case/$slug")({
 });
 
 function CasePage() {
-  const c = Route.useLoaderData();
+  const c = Route.useLoaderData() as CaseData;
 
   return (
     <article className="pt-32">

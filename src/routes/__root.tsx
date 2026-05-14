@@ -96,6 +96,7 @@ function RootComponent() {
           <Outlet />
         </main>
         <SiteFooter />
+        <CinematicFx />
       </SmoothScrollProvider>
     </QueryClientProvider>
   );

@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import kwcBanner from "@/assets/kwc-ewc-banner.png";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
-import scene1 from "@/assets/scene-1.jpg";
+import caseCodFraud from "@/assets/case-cod-fraud.png";
+import caseIncentiveLeakage from "@/assets/case-incentive-leakage.png";
 import scene2 from "@/assets/scene-2.jpg";
-import scene3 from "@/assets/scene-3.jpg";
 import { PageHero } from "@/components/page-hero";
 import { ScrollReveal, StickyChapter } from "@/components/scroll-scenes";
 
@@ -20,12 +21,19 @@ export const Route = createFileRoute("/work")({
 });
 
 const investigations = [
-  { slug: "cod-fraud", title: "COD Fraud Investigation", role: "Trust & Safety", year: "2025", image: scene3 },
+  { slug: "cod-fraud", title: "COD Fraud Investigation", role: "Trust & Safety", year: "2025", image: caseCodFraud },
   { slug: "seller-abuse", title: "Seller Abuse & Pirated Products", role: "Trust & Safety", year: "2025", image: scene2 },
-  { slug: "incentive-leakage", title: "Incentive Leakage in CX Metrics", role: "Audit Governance", year: "2025", image: scene1 },
+  { slug: "incentive-leakage", title: "Incentive Leakage in CX Metrics", role: "Audit Governance", year: "2025", image: caseIncentiveLeakage },
 ];
 
 const systems = [
+  {
+    slug: "kwc-tournament-operations",
+    title: "KWC · Tournament & Discord automation",
+    role: "Tencent · Honor of Kings India · EWC Qualifiers",
+    year: "2026",
+    image: kwcBanner,
+  },
   { slug: "solvextra", title: "SolveXtra QMS", role: "QA Governance Platform", year: "2025", image: project1 },
   { slug: "solvextra-go", title: "SolvExtra GO", role: "Process Gap Hub", year: "2025", image: project2 },
   { slug: "omnichannel", title: "Omnichannel CX", role: "Support Workflow", year: "2025", image: project3 },

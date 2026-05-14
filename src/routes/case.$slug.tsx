@@ -2,9 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { PageHero } from "@/components/page-hero";
 import { ScrollReveal } from "@/components/scroll-scenes";
-import scene1 from "@/assets/scene-1.jpg";
 import scene2 from "@/assets/scene-2.jpg";
-import scene3 from "@/assets/scene-3.jpg";
+import caseCodFraud from "@/assets/case-cod-fraud.png";
+import caseIncentiveLeakage from "@/assets/case-incentive-leakage.png";
+import kwcBanner from "@/assets/kwc-ewc-banner.png";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -13,10 +14,14 @@ import project4 from "@/assets/project-4.jpg";
 type Section = { heading: string; items: string[] };
 type CaseData = {
   title: string;
+  /** Two-line hero headline on the case page. Full `title` stays for SEO and document title. */
+  heroStack?: readonly [string, string];
   category: string;
   kind: "investigation" | "system";
   year: string;
   image: string;
+  /** Focal point for `object-cover` on the case hero image (Tailwind `object-*` utilities). */
+  imageObjectPosition?: string;
   intro: string;
   sections: Section[];
   risk?: string;
@@ -31,7 +36,7 @@ const cases: Record<string, CaseData> = {
     category: "Trust & Safety Operations",
     kind: "investigation",
     year: "2025",
-    image: scene3,
+    image: caseCodFraud,
     intro:
       "Investigated a fraud pattern affecting customers placing Cash on Delivery orders. Customers reported scam calls within minutes of placing orders, where fraudsters already had access to names, phone numbers, addresses, and order details.",
     sections: [
@@ -105,7 +110,7 @@ const cases: Record<string, CaseData> = {
     category: "Quality Operations & Audit Governance",
     kind: "investigation",
     year: "2025",
-    image: scene1,
+    image: caseIncentiveLeakage,
     intro:
       "Investigated loopholes in audit tagging workflows where operational metrics looked healthy, but actual audit visibility and QA accuracy were being bypassed. Discovered when audit targets started dropping despite normal-looking dashboards.",
     sections: [
@@ -249,6 +254,96 @@ const cases: Record<string, CaseData> = {
       },
     ],
     focus: ["Learning Design", "EdTech", "Gamification", "Product Thinking"],
+    next: { slug: "kwc-tournament-operations", title: "KWC · Tournament & Discord automation" },
+  },
+  "kwc-tournament-operations": {
+    title: "KWC Tournament Operations & Discord Automation System",
+    heroStack: ["KWC Tournament Operations", "& Discord automation system"],
+    category: "Honor of Kings India · Tencent · Esports World Cup (EWC) Qualifiers",
+    kind: "system",
+    year: "2026",
+    image: kwcBanner,
+    imageObjectPosition: "object-[62%_38%]",
+    intro:
+      "Designed and managed a large-scale Discord automation and tournament operations workflow system for KWC (Honor of Kings World Cup) qualifier operations connected to the Esports World Cup (EWC) competitive ecosystem under Honor of Kings India (Tencent). The project focused on managing large tournament communities, match coordination, moderation workflows, team communication, and Discord infrastructure efficiently during high-volume esports qualifier operations.",
+    sections: [
+      {
+        heading: "Manual workflow risks",
+        items: [
+          "Handling tournament workflows manually for hundreds of players and teams created multiple operational risks.",
+          "Delayed room setup",
+          "Incorrect permissions",
+          "Communication confusion",
+          "Moderator overload",
+          "Repetitive setup work",
+          "Missing match coordination threads",
+          "Operational delays during live tournament activity",
+        ],
+      },
+      {
+        heading: "Tournament scale",
+        items: [
+          "160+ participating teams",
+          "Large-scale qualifier coordination",
+          "Real-time operational management",
+          "Multi-stage tournament workflows",
+          "High-volume Discord activity management",
+        ],
+      },
+      {
+        heading: "Core operational problems solved",
+        items: [
+          "Manual Discord setup delays",
+          "Inconsistent role and permission handling",
+          "Difficulty managing tournament communication at scale",
+          "Repetitive operational tasks for moderators",
+          "Coordination inefficiencies during active tournament stages",
+          "Lack of structured workflow visibility",
+        ],
+      },
+      {
+        heading: "What the system did",
+        items: [
+          "Automated match room creation — generated Discord channels, rooms, and communication structures for tournament matches using operational workflow logic, reducing manual setup time during qualifiers.",
+          "Dynamic match threads — organized discussion threads for teams, moderators, and operational coordination to improve communication clarity during tournament progression.",
+          "Automated role and permission assignment — structured Discord roles for teams, players, moderators, and tournament staff to improve operational control and reduce manual permission errors.",
+          "Excel-based bulk tournament setup — structured Excel uploads to quickly configure tournament workflows, team setups, and Discord operational structures for large participation volumes.",
+          "Moderation workflow support — reduced repetitive workload by automating tournament infrastructure setup and improving workflow visibility.",
+          "Tournament coordination infrastructure — improved room organization, communication routing, and team coordination workflows during qualifier stages.",
+          "Operational scalability — workflows supporting large esports participation volumes without relying heavily on manual operations.",
+        ],
+      },
+      {
+        heading: "Tools and systems used",
+        items: [
+          "Discord",
+          "Excel-based operational upload systems",
+          "Workflow automation logic",
+          "Structured permission management",
+          "Community moderation systems",
+        ],
+      },
+      {
+        heading: "Project focus",
+        items: [
+          "Operational workflow thinking, esports coordination handling, moderation system design, large-scale communication structuring, and automation-driven operational efficiency within competitive gaming environments — delivered for Tencent and Honor of Kings India.",
+        ],
+      },
+    ],
+    risk:
+      "Business and operational impact included reduced manual setup workload for tournament moderators, faster operational coordination, fewer Discord management errors, clearer communication across teams, improved scalability for large tournament workflows, and more focus on live operational management instead of repetitive setup tasks.",
+    skills: [
+      "Discord Operations",
+      "Esports Operations",
+      "Workflow Automation",
+      "Tournament Coordination",
+      "Moderation Systems",
+      "Community Operations",
+      "Role and permission management",
+      "Operational structuring",
+      "Automation logic",
+      "Large-scale workflow handling",
+    ],
     next: { slug: "cod-fraud", title: "COD Fraud Investigation" },
   },
 };
@@ -298,9 +393,22 @@ function CasePage() {
           initial={{ y: 48, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-4 font-display text-fluid-hero leading-[0.88]"
+          className={
+            c.heroStack
+              ? "mt-4 max-w-5xl text-balance font-display leading-[0.92]"
+              : "mt-4 font-display text-fluid-hero leading-[0.88]"
+          }
         >
-          {c.title}
+          {c.heroStack ? (
+            <>
+              <span className="block text-[clamp(2.35rem,7.5vw,5.75rem)] tracking-[-0.03em]">{c.heroStack[0]}</span>
+              <span className="mt-3 block text-[clamp(1.35rem,3.8vw,2.65rem)] tracking-[-0.02em] text-muted-foreground">
+                {c.heroStack[1]}
+              </span>
+            </>
+          ) : (
+            c.title
+          )}
         </motion.h1>
         <p className="mt-6 text-xs uppercase tracking-[0.3em] text-muted-foreground">{c.category}</p>
       </PageHero>
@@ -312,7 +420,7 @@ function CasePage() {
               <img
                 src={c.image}
                 alt=""
-                className="absolute inset-0 h-full w-full object-cover"
+                className={`absolute inset-0 h-full w-full object-cover ${c.imageObjectPosition ?? ""}`}
                 width={1920}
                 height={900}
               />

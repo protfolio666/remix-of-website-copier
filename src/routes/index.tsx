@@ -4,13 +4,14 @@ import { CinematicHero } from "@/components/cinematic-hero";
 import { TrailerScenes } from "@/components/trailer-scenes";
 import { HorizontalGallery } from "@/components/horizontal-gallery";
 import { ScrollReveal, StickyChapter } from "@/components/scroll-scenes";
+import kwcBanner from "@/assets/kwc-ewc-banner.png";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
-import scene1 from "@/assets/scene-1.jpg";
+import caseCodFraud from "@/assets/case-cod-fraud.png";
+import caseIncentiveLeakage from "@/assets/case-incentive-leakage.png";
 import scene2 from "@/assets/scene-2.jpg";
-import scene3 from "@/assets/scene-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,12 +25,18 @@ export const Route = createFileRoute("/")({
 
 /* Investigations: COD → journey/logistics; seller abuse → digital/keyboard; incentive leakage → city-scale systems */
 const investigations = [
-  { slug: "cod-fraud", title: "COD Fraud Investigation", role: "Trust & Safety · 2025", image: scene3 },
+  { slug: "cod-fraud", title: "COD Fraud Investigation", role: "Trust & Safety · 2025", image: caseCodFraud },
   { slug: "seller-abuse", title: "Seller Abuse & Pirated Products", role: "Trust & Safety · 2025", image: scene2 },
-  { slug: "incentive-leakage", title: "Incentive Leakage in CX Metrics", role: "Audit Governance · 2025", image: scene1 },
+  { slug: "incentive-leakage", title: "Incentive Leakage in CX Metrics", role: "Audit Governance · 2025", image: caseIncentiveLeakage },
 ];
 
 const systems = [
+  {
+    slug: "kwc-tournament-operations",
+    title: "KWC · Tournament & Discord automation",
+    role: "Tencent · Esports Operations · Discord automation",
+    image: kwcBanner,
+  },
   { slug: "solvextra", title: "SolveXtra QMS", role: "QA Governance Platform", image: project1 },
   { slug: "solvextra-go", title: "SolvExtra GO", role: "Process Gap Hub", image: project2 },
   { slug: "omnichannel", title: "Omnichannel CX", role: "Support Operations", image: project3 },

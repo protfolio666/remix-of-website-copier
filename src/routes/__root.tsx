@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SmoothScrollProvider } from "@/components/smooth-scroll";
+import { CinematicFx } from "@/components/cinematic-fx";
 
 function NotFoundComponent() {
   return (

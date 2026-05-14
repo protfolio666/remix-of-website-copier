@@ -35,10 +35,11 @@ export function TrailerScenes() {
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: () => `+=${total * 110}%`,
-          scrub: 1,
+          end: () => `+=${total * 160}%`,
+          scrub: 1.2,
           pin: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -53,28 +54,39 @@ export function TrailerScenes() {
         const body = slide.querySelector(".trailer-body");
         const num = slide.querySelector(".trailer-num");
 
-        // Ken-burns zoom across the whole slide window
-        tl.fromTo(img, { scale: 1.05 }, { scale: 1.25, ease: "none" }, i);
+        // Slow cinematic Ken-Burns across the full slide window
+        tl.fromTo(img, { scale: 1.08, yPercent: 4 }, { scale: 1.32, yPercent: -4, ease: "none" }, i);
 
-        // text in
+        // text in (slower, longer hold)
         tl.fromTo(
           [eyebrow, title, body, num],
-          { y: 60, opacity: 0, filter: "blur(14px)" },
-          { y: 0, opacity: 1, filter: "blur(0px)", stagger: 0.05, ease: "power2.out" },
-          i + 0.1,
+          { y: 80, opacity: 0, filter: "blur(18px)" },
+          { y: 0, opacity: 1, filter: "blur(0px)", stagger: 0.08, ease: "power3.out", duration: 0.4 },
+          i + 0.05,
         );
 
-        // text out
+        // text out + crossfade (longer overlap, like a film dissolve)
         if (i < total - 1) {
           tl.to(
             [eyebrow, title, body, num],
-            { y: -60, opacity: 0, filter: "blur(10px)", stagger: 0.03, ease: "power2.in" },
-            i + 0.7,
+            { y: -80, opacity: 0, filter: "blur(14px)", stagger: 0.05, ease: "power2.in", duration: 0.35 },
+            i + 0.6,
           );
-          // crossfade
-          tl.to(slide, { opacity: 0, ease: "none" }, i + 0.85);
-          tl.to(slides[i + 1], { opacity: 1, ease: "none" }, i + 0.85);
+          tl.to(slide, { opacity: 0, ease: "power1.inOut", duration: 0.5 }, i + 0.7);
+          tl.to(slides[i + 1], { opacity: 1, ease: "power1.inOut", duration: 0.5 }, i + 0.7);
         }
+      });
+
+      // progress bar
+      gsap.to(".trailer-progress", {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top top",
+          end: () => `+=${total * 160}%`,
+          scrub: true,
+        },
       });
     },
     { scope: root },

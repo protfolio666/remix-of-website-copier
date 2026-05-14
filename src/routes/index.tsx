@@ -1,47 +1,52 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Marquee } from "@/components/marquee";
 import { CinematicHero } from "@/components/cinematic-hero";
+import { TrailerScenes } from "@/components/trailer-scenes";
 import { HorizontalGallery } from "@/components/horizontal-gallery";
 import { ScrollReveal, StickyChapter } from "@/components/scroll-scenes";
+import project1 from "@/assets/project-1.jpg";
+import project2 from "@/assets/project-2.jpg";
+import project3 from "@/assets/project-3.jpg";
+import project4 from "@/assets/project-4.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your Name — Portfolio" },
-      { name: "description", content: "Cinematic scroll-driven portfolio." },
+      { title: "Abhishek Das — Designer & Developer" },
+      { name: "description", content: "Cinematic scroll-driven portfolio of Abhishek Das." },
     ],
   }),
   component: Home,
 });
 
 const projects = [
-  { slug: "project-one", title: "Project One", role: "Brand · 2025" },
-  { slug: "project-two", title: "Project Two", role: "Web · 2024" },
-  { slug: "project-three", title: "Project Three", role: "Product · 2024" },
-  { slug: "project-four", title: "Project Four", role: "Identity · 2023" },
-  { slug: "project-five", title: "Project Five", role: "Direction · 2023" },
+  { slug: "project-one", title: "Aurora OS", role: "Product · 2025", image: project1 },
+  { slug: "project-two", title: "Noir Studio", role: "Brand · 2024", image: project2 },
+  { slug: "project-three", title: "Halo App", role: "Mobile · 2024", image: project3 },
+  { slug: "project-four", title: "Edition 03", role: "Editorial · 2023", image: project4 },
 ];
 
 function Home() {
   return (
     <>
       <CinematicHero />
+      <TrailerScenes />
       <Marquee items={["Design", "Direction", "Code", "Story", "Motion", "Brand"]} />
 
       <StickyChapter number="01 — About" title="A short introduction.">
         <ScrollReveal>
           <p className="text-2xl leading-snug md:text-3xl">
-            Two sentences of bio go here. Replace with what you actually do — the kind of work, the kind of clients, what makes the work yours.
+            I'm Abhishek Das — an independent designer and developer crafting cinematic digital experiences for ambitious brands and founders.
           </p>
         </ScrollReveal>
         <ScrollReveal>
           <p className="max-w-xl text-base text-muted-foreground">
-            A second paragraph for the longer story — process, philosophy, or a recent focus. Keep it tight; the work below does the heavy lifting.
+            Five years across brand identity, product design, and frontend engineering. I work with teams who care as much about the feel of the product as the function.
           </p>
         </ScrollReveal>
         <ScrollReveal>
           <Link to="/about" className="inline-flex items-center gap-3 border-b border-foreground pb-1 text-xs uppercase tracking-[0.3em] hover:text-accent hover:border-accent">
-            Read more <span>→</span>
+            More about me <span>→</span>
           </Link>
         </ScrollReveal>
       </StickyChapter>

@@ -7,8 +7,8 @@ export function SiteFooter() {
         <div className="grid gap-12 pb-16 md:grid-cols-3">
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Get in touch</p>
-            <a href="mailto:hello@example.com" className="mt-4 block font-display text-3xl hover:text-accent">
-              hello@example.com
+            <a href="mailto:hello@abhishekdas.com" className="mt-4 block font-display text-3xl hover:text-accent">
+              hello@abhishekdas.com
             </a>
           </div>
           <div>
@@ -41,14 +41,14 @@ export function SiteFooter() {
         </div>
 
         <div className="flex items-end justify-between border-t border-border pt-6 pb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          <span>© {new Date().getFullYear()} — Your Name</span>
+          <span>© {new Date().getFullYear()} — Abhishek Das</span>
           <span>Made with care</span>
         </div>
       </div>
 
       <div className="pointer-events-none select-none">
         <h2 className="font-display text-fluid-hero whitespace-nowrap leading-[0.8] text-foreground/95 -mb-[3vw] -ml-[2vw]">
-          PORTFOLIO
+          ABHISHEK DAS
         </h2>
       </div>
     </footer>

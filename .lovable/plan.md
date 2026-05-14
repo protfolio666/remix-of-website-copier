@@ -1,60 +1,51 @@
 ## Goal
+Replace placeholder portfolio copy with Abhishek Das's real content (Operations Intelligence / Trust & Safety / CX Governance) while keeping the cinematic GTA-VI-style scroll experience intact.
 
-A reusable portfolio template that mirrors the **structure, scroll behavior, and interaction feel** of the Rockstar GTA VI page — without copying its art, colors, fonts, copy, or logos. You'll swap in your own content later.
+## Content mapping (what goes where)
 
-## Sections (separate routes where it makes sense)
+**Home (`/`)** — keeps the cinematic shell, repurposed:
+- `CinematicHero`: name "Abhishek Das" + new tagline "Operations Intelligence • Trust & Safety • CX Governance • Process Excellence" + sub-line "I investigate operational problems, fraud patterns, audit loopholes, and workflow failures — then design systems that improve visibility, accountability, and CX." + 4 stat chips (3.5+ Yrs, 9000+ Audits, Fraud Investigations, Workflow Systems) + 3 CTAs (View Case Studies / Download Resume / Contact).
+- `TrailerScenes`: 3 scenes repurposed as "What I Solve" headlines — Fraud & Abuse Detection / Audit & QA Governance / CX Workflow Optimization (cinematic crossfades retained).
+- New "What I Solve" grid section: 6 capability cards (full list from brief).
+- `HorizontalGallery`: shows the 4 case studies + projects as scroll-pinned panels with real titles.
+- "Case Studies" sticky chapter: lists the 3 investigations with links.
+- "Systems & Workflow Design" sticky chapter: lists 4 projects (SolveXtra, SolvExtra GO, Omnichannel, SQL Sikho).
+- Contact CTA section.
 
-```
-/             Home — full-bleed cinematic hero
-/about        About / bio
-/work         Projects grid
-/case/$slug   Individual case study (dynamic route)
-/experience   Timeline / experience
-/contact      Contact form + links
-```
+**About (`/about`)** — rewrite with the full About Me copy + 8 focus-area chips. Portrait stays.
 
-A sticky top nav links between them. Home also stitches teaser blocks for each section so it feels like one cinematic flow.
+**Work (`/work`)** — rename to "Case Studies & Projects". Two groups: Investigations (3) and Systems (4), each linking to a detail route.
 
-## Structural & interaction patterns to replicate
+**Case detail (`/case/$slug`)** — replace the `cases` map with 7 real entries:
+- `cod-fraud`, `seller-abuse`, `incentive-leakage` (full investigation structure: What was analyzed / Key Findings / Business Risk / Skills)
+- `solvextra`, `solvextra-go`, `omnichannel`, `sql-sikho` (Core Features / Operational Focus)
+- Update template to render these new sections instead of the generic "brief / approach / outcome" chapters.
 
-1. **Full-viewport hero** with a looping background placeholder (video slot or animated gradient stand-in) and oversized display headline pinned bottom-left.
-2. **Sticky minimal top nav** — logo left, links right; background goes from transparent → solid on scroll.
-3. **Scroll-snap sections** — each major block fills the viewport and snaps as you scroll.
-4. **Parallax / scroll-reveal** — headlines and images slide/fade in as they enter the viewport (Motion for React).
-5. **Pinned section headings** — section title sticks while content scrolls past it.
-6. **Horizontal scroll gallery** for the Projects strip on desktop.
-7. **Marquee ticker** band between sections (your skills, tools, or tagline loop).
-8. **Hover-reveal project cards** — image scales, overlay slides up with title + role.
-9. **Case study page** with chaptered scroll: cover → problem → process → outcome, each chapter a full-bleed slide.
-10. **Footer "big word"** — giant word/logo bleeding off the bottom edge.
+**Experience (`/experience`)** — replace timeline with the 4 real roles (Honor of Kings/Tencent, Wyzmindz, Indian Oil, Tech Mahindra) with responsibilities + achievements. Replace "Recognition" block with **Core Skills** (4 skill groups: Trust & Safety / CX & Quality / Operations & Governance / Tools).
 
-## Design tokens (placeholder, easy to swap)
+**Contact (`/contact`)** — update copy: "Let's Connect", "Open to opportunities in:" list (7 areas), email `abhishek@solvextra.com`, LinkedIn `linkedin.com/in/abhi003`, Location India. Form stays. Add "Download Resume" button (placeholder link `#` until you provide the PDF).
 
-Neutral monochrome system so you can recolor in one place later:
-- Background: near-black `oklch(0.12 0 0)`
-- Foreground: off-white `oklch(0.96 0 0)`
-- Accent: single bright placeholder `oklch(0.78 0.18 80)` — change this one token to rebrand
-- Display font: a bold geometric placeholder (e.g. Anton or Bebas-style via Google Fonts)
-- Body font: clean sans (Inter)
+**Header / Footer** — already says Abhishek Das. Update nav labels if needed (Work → Case Studies). Footer email updated to `abhishek@solvextra.com`.
 
-All colors live as semantic tokens in `src/styles.css` so swapping later is a one-file edit.
+## What I'm NOT adding (and why)
+- **Logos / company brand marks** for Tencent, IOCL, Tech Mahindra, Wyzmindz — not provided; would need approval to use.
+- **Real screenshots of SolveXtra / SolvExtra GO / Omnichannel / SQL Sikho** — using existing generated abstract project images as placeholders. Swap when you send real screenshots.
+- **Resume PDF** — button will link to `#` until you upload one (drop the file and I'll wire it up).
+- **Detailed numeric metrics inside SolveXtra projects** — none provided, so I'll keep feature lists only (no fabricated KPIs).
+- The original generic "brief / approach / outcome" chapter template on case pages — replaced by the structured investigation format you wrote.
+- The generic "Awards / Recognition" list on Experience — replaced by Core Skills (you didn't list awards beyond Spotlight/BRAVO, which I'll fold into achievements under each role instead).
 
-## Image placeholders
+## Notes / things to confirm after build
+- Honor of Kings start date in your brief says **April 2026** (future). I'll keep it as written but flag it — likely a typo for 2025; tell me which.
+- Email `abhishek@solvextra.com` will be used everywhere; confirm if you'd rather use a personal one.
+- No backend / form submission — contact form stays as the existing client-side "Thanks" stub.
 
-Every image slot uses a labeled gray box with intended aspect ratio + a short note ("Hero loop — replace with .mp4", "Project 01 cover — 16:9"). No generated stock photos until you give content.
+## Files to edit
+- `src/components/cinematic-hero.tsx` (new copy + stat chips + 3 CTAs)
+- `src/components/trailer-scenes.tsx` (3 scene captions)
+- `src/components/site-header.tsx`, `src/components/site-footer.tsx` (nav + email)
+- `src/routes/index.tsx` (What I Solve grid, sticky chapters list real items)
+- `src/routes/about.tsx`, `src/routes/work.tsx`, `src/routes/experience.tsx`, `src/routes/contact.tsx`
+- `src/routes/case.$slug.tsx` (new data map + new section structure)
 
-## Tech notes
-
-- TanStack Start file-based routes (one file per page above).
-- Motion for React for scroll/reveal/parallax animations.
-- CSS scroll-snap on the home page sections.
-- Lenis-style smooth-scroll feel via CSS `scroll-behavior` + Motion easing (no extra lib needed).
-- Fully responsive: horizontal gallery becomes vertical stack on mobile; hero text scales with `clamp()`.
-
-## Out of scope for v1
-
-- Real copy, photos, videos, logos, brand colors (you'll provide).
-- CMS / backend (can add Lovable Cloud later if you want editable content).
-- Audio.
-
-When you approve, I'll build it end-to-end, then you drop in your content and I'll restyle the token palette to your brand.
+No new dependencies. No backend changes. Cinematic FX, scroll, and animations untouched.

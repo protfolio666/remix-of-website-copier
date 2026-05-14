@@ -6,11 +6,22 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Abhishek Das" },
-      { name: "description", content: "About Abhishek Das, designer and developer." },
+      { name: "description", content: "Abhishek Das — operations, trust & safety, and CX governance." },
     ],
   }),
   component: AboutPage,
 });
+
+const focus = [
+  "Fraud & Abuse Investigation",
+  "Trust & Safety Operations",
+  "CX Governance",
+  "QA & Audit Operations",
+  "RCA & Process Improvement",
+  "Workflow Systems",
+  "Escalation Management",
+  "Operational Intelligence",
+];
 
 function AboutPage() {
   return (
@@ -24,7 +35,7 @@ function AboutPage() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="mt-6 font-display text-fluid-hero leading-[0.88]"
           >
-            Designer.<br /><span className="text-accent">Builder.</span><br />Storyteller.
+            Investigator.<br /><span className="text-accent">Operator.</span><br />Systems builder.
           </motion.h1>
         </div>
       </section>
@@ -42,25 +53,28 @@ function AboutPage() {
               style={{ aspectRatio: "3/4" }}
             />
           </div>
-          <div className="space-y-8 lg:col-span-6 lg:col-start-7">
+          <div className="space-y-6 lg:col-span-6 lg:col-start-7">
             <p className="text-2xl leading-snug">
-              I'm Abhishek Das. I design and build digital products with a focus on craft, motion, and the feel of an interface — not just the function.
+              I work in operations, quality, customer experience, and trust & safety environments where businesses handle large volumes of customers, audits, escalations, and workflows every day.
             </p>
-            <p className="text-base text-muted-foreground">
-              For five years I've worked across brand identity, product design, and frontend engineering, partnering with founders, studios, and in-house teams who care about the details.
+            <p className="text-base text-muted-foreground leading-relaxed">
+              My work focuses on identifying operational problems before they become bigger business risks. Over the years I've worked on fraud investigations, audit governance, process gap analysis, seller abuse detection, CX improvements, workflow optimization, and escalation management.
             </p>
-            <p className="text-base text-muted-foreground">
-              The work tends to live where editorial meets product — typography-led, image-driven, and quietly cinematic. If that resonates, let's talk.
+            <p className="text-base text-muted-foreground leading-relaxed">
+              I enjoy understanding how systems break, why processes fail, where visibility gets lost, and how operations can be improved using better workflows, accountability, and governance.
+            </p>
+            <p className="text-base text-muted-foreground leading-relaxed">
+              I also design operational systems and workflow platforms using AI-assisted no-code tools to solve real business problems faster.
             </p>
 
             <div className="grid grid-cols-2 gap-8 border-t border-border pt-8">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Based in</p>
-                <p className="mt-2 font-display text-2xl">Kolkata, IN</p>
+                <p className="mt-2 font-display text-2xl">India</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Available</p>
-                <p className="mt-2 font-display text-2xl text-accent">Q1 2026</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Open to</p>
+                <p className="mt-2 font-display text-2xl text-accent">Trust & Safety roles</p>
               </div>
             </div>
           </div>
@@ -69,18 +83,13 @@ function AboutPage() {
 
       <section className="bg-surface px-6 py-32 lg:px-12">
         <div className="mx-auto max-w-[1800px]">
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Skills</p>
-          <h2 className="mt-6 font-display text-fluid-display">What I do.</h2>
-          <div className="mt-16 grid gap-px bg-border md:grid-cols-3">
-            {[
-              { t: "Brand Identity", d: "Logos, systems, guidelines, art direction." },
-              { t: "Web & Interactive", d: "Sites, apps, prototypes, motion design." },
-              { t: "Product Design", d: "UI/UX, design systems, frontend engineering." },
-            ].map((s) => (
-              <div key={s.t} className="bg-surface p-10">
-                <h3 className="font-display text-3xl">{s.t}</h3>
-                <p className="mt-4 text-sm text-muted-foreground">{s.d}</p>
-              </div>
+          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Areas of focus</p>
+          <h2 className="mt-6 font-display text-fluid-display">What I work on.</h2>
+          <div className="mt-16 flex flex-wrap gap-3">
+            {focus.map((f) => (
+              <span key={f} className="border border-border bg-background px-5 py-3 text-sm">
+                {f}
+              </span>
             ))}
           </div>
         </div>

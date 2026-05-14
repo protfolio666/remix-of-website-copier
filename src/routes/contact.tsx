@@ -5,12 +5,22 @@ import { useState } from "react";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Your Name" },
-      { name: "description", content: "Start a project together." },
+      { title: "Contact — Abhishek Das" },
+      { name: "description", content: "Open to opportunities in Trust & Safety, Fraud Ops, Quality, CX Governance, and Process Excellence." },
     ],
   }),
   component: ContactPage,
 });
+
+const openTo = [
+  "Trust & Safety",
+  "Fraud Operations",
+  "Quality Operations",
+  "CX Governance",
+  "Marketplace Integrity",
+  "Process Excellence",
+  "Operations Intelligence",
+];
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
@@ -26,35 +36,45 @@ function ContactPage() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="mt-6 font-display text-fluid-hero leading-[0.88]"
           >
-            Say<br /><span className="text-accent">hello.</span>
+            Let's<br /><span className="text-accent">connect.</span>
           </motion.h1>
         </div>
       </section>
 
       <section className="px-6 py-32 lg:px-12">
         <div className="mx-auto grid max-w-[1800px] gap-16 lg:grid-cols-12">
-          <div className="space-y-10 lg:col-span-4">
+          <div className="space-y-10 lg:col-span-5">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Email</p>
-              <a href="mailto:hello@example.com" className="mt-2 block font-display text-3xl hover:text-accent">hello@example.com</a>
+              <a href="mailto:abhishek@solvextra.com" className="mt-2 block font-display text-3xl hover:text-accent">abhishek@solvextra.com</a>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Studio</p>
-              <p className="mt-2 font-display text-xl">City, Country</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">LinkedIn</p>
+              <a href="https://linkedin.com/in/abhi003" target="_blank" rel="noreferrer" className="mt-2 block font-display text-2xl hover:text-accent">linkedin.com/in/abhi003 ↗</a>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Social</p>
-              <ul className="mt-2 space-y-1 text-base">
-                <li><a href="#" className="hover:text-accent">Instagram ↗</a></li>
-                <li><a href="#" className="hover:text-accent">Twitter ↗</a></li>
-                <li><a href="#" className="hover:text-accent">LinkedIn ↗</a></li>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Location</p>
+              <p className="mt-2 font-display text-2xl">India</p>
+            </div>
+
+            <div className="border-t border-border pt-8">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Open to opportunities in</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {openTo.map((o) => (
+                  <li key={o} className="border border-border px-3 py-1.5 text-xs">{o}</li>
+                ))}
               </ul>
+            </div>
+
+            <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.3em]">
+              <a href="#" className="border border-foreground/40 px-5 py-3 hover:border-accent hover:text-accent">Download Resume</a>
+              <a href="https://linkedin.com/in/abhi003" target="_blank" rel="noreferrer" className="border border-foreground/40 px-5 py-3 hover:border-accent hover:text-accent">LinkedIn ↗</a>
             </div>
           </div>
 
           <form
             onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-            className="space-y-8 lg:col-span-7 lg:col-start-6"
+            className="space-y-8 lg:col-span-6 lg:col-start-7"
           >
             {sent ? (
               <div className="border border-accent p-10 text-center">
@@ -66,7 +86,7 @@ function ContactPage() {
                 <Field label="Email" name="email" type="email" />
                 <Field label="Company" name="company" required={false} />
                 <div>
-                  <label className="block text-xs uppercase tracking-[0.3em] text-muted-foreground">Project</label>
+                  <label className="block text-xs uppercase tracking-[0.3em] text-muted-foreground">Message</label>
                   <textarea
                     name="message"
                     rows={5}

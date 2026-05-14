@@ -18,10 +18,11 @@ export function CinematicHero() {
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: "+=180%",
-          scrub: 1,
+          end: "+=260%",
+          scrub: 1.4,
           pin: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 

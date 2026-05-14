@@ -59,11 +59,7 @@ export function CinematicHero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,oklch(0.12_0_0/0.7)_100%)]" />
 
       <div className="relative z-10 flex h-full flex-col">
-        <div className="flex-1 px-6 pt-32 lg:px-12 text-center">
-          <p className="hero-eyebrow text-xs uppercase tracking-[0.4em] text-accent will-change-transform">
-            Operations Intelligence · Trust & Safety · CX Governance
-          </p>
-        </div>
+        <div className="flex-1" />
 
         <div className="px-6 pb-16 lg:px-12 lg:pb-20">
           <h1 className="font-display text-fluid-hero">

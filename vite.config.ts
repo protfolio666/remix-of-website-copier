@@ -4,12 +4,16 @@
 //     componentTagger (dev-only), VITE_* env injection, @ path alias, React/TanStack dedupe,
 //     error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... } }) if needed.
+import netlify from "@netlify/vite-plugin-tanstack-start";
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-// @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
+// Netlify: @netlify/vite-plugin-tanstack-start prepares the production bundle; disable the
+// Cloudflare Workers build plugin (otherwise wrangler output wins over Netlify’s layout).
 export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
+  cloudflare: false,
+  plugins: [netlify()],
 });

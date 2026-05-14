@@ -78,11 +78,6 @@ export function CinematicHero() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.3em]">
-            <a href="/work" className="border border-foreground bg-foreground text-background px-5 py-3 hover:bg-accent hover:border-accent">View Case Studies →</a>
-            <a href="#" className="border border-foreground/40 px-5 py-3 hover:border-accent hover:text-accent">Download Resume</a>
-            <a href="/contact" className="border border-foreground/40 px-5 py-3 hover:border-accent hover:text-accent">Contact Me</a>
-          </div>
         </div>
       </div>
 

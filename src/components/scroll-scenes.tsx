@@ -26,17 +26,18 @@ export function ScrollReveal({
 
       gsap.fromTo(
         ref.current,
-        { y: 80, opacity: 0, filter: "blur(12px)" },
+        { y: 56, opacity: 0, filter: "blur(8px)" },
         {
           y: 0,
           opacity: 1,
           filter: "blur(0px)",
           ease: "power3.out",
-          duration: 1.2,
+          duration: 0.85,
           scrollTrigger: {
             trigger: ref.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top 90%",
+            fastScrollEnd: true,
+            toggleActions: "play none none none",
           },
         },
       );
@@ -68,14 +69,15 @@ export function StickyChapter({
   invert?: boolean;
 }) {
   const root = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
     () => {
-      if (!root.current) return;
+      if (!root.current || !titleRef.current) return;
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduce) return;
 
-      gsap.to(".chapter-title", {
+      gsap.to(titleRef.current, {
         scale: 0.85,
         opacity: 0.4,
         filter: "blur(2px)",
@@ -84,7 +86,7 @@ export function StickyChapter({
           trigger: root.current,
           start: "top top",
           end: "bottom top",
-          scrub: true,
+          scrub: 0.5,
         },
       });
     },
@@ -100,7 +102,10 @@ export function StickyChapter({
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{number}</p>
-            <h2 className="chapter-title mt-6 font-display text-fluid-display origin-top-left will-change-transform">
+            <h2
+              ref={titleRef}
+              className="chapter-title mt-6 font-display text-fluid-display origin-top-left will-change-transform"
+            >
               {title}
             </h2>
           </div>

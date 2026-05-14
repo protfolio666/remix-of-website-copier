@@ -13,7 +13,15 @@ interface Item {
   image: string;
 }
 
-export function HorizontalGallery({ items }: { items: Item[] }) {
+export function HorizontalGallery({
+  items,
+  eyebrow = "03 — Case Studies",
+  title = "Selected investigations.",
+}: {
+  items: Item[];
+  eyebrow?: string;
+  title?: string;
+}) {
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
 
@@ -47,8 +55,8 @@ export function HorizontalGallery({ items }: { items: Item[] }) {
       <div className="absolute inset-x-0 top-0 z-10 px-6 pt-10 lg:px-12 lg:pt-12">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">02 — Selected Work</p>
-            <h2 className="mt-3 font-display text-fluid-xl">Recent projects.</h2>
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{eyebrow}</p>
+            <h2 className="mt-3 font-display text-fluid-xl">{title}</h2>
           </div>
           <p className="hidden text-xs uppercase tracking-[0.3em] text-muted-foreground md:block">
             Scroll →

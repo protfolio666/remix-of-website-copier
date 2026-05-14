@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
+import logoIndianOil from "@/assets/logos/indian-oil.png?url";
+import logoTechMahindra from "@/assets/logos/tech-mahindra.png?url";
+import logoTencent from "@/assets/logos/tencent.png?url";
+import logoWyzmindz from "@/assets/logos/wyzmindz.png?url";
+import { CompanyLogoMark } from "@/components/company-logo";
 
 export const Route = createFileRoute("/experience")({
   head: () => ({
@@ -15,7 +20,10 @@ const timeline = [
   {
     year: "Apr 2026 — Present",
     role: "Operations Moderator",
-    company: "Honor of Kings India (Tencent)",
+    company: "Honor of Kings India (Tencent) — Freelance",
+    logoSrc: logoTencent,
+    logoShort: "T",
+    logoFrame: "flush" as const,
     desc: "Moderation operations, Discord community workflows, esports support, and automation systems for tournament environments.",
     bullets: [
       "Manage moderation workflows across community channels",
@@ -29,6 +37,8 @@ const timeline = [
     year: "Jan 2025 — Present",
     role: "Senior Quality Analyst",
     company: "Wyzmindz",
+    logoSrc: logoWyzmindz,
+    logoShort: "W",
     desc: "CX operations, quality governance, VOC analysis, fraud investigations, and operational RCA across support environments.",
     bullets: [
       "Conduct quality audits and identify customer pain points",
@@ -43,6 +53,9 @@ const timeline = [
     year: "Feb 2024 — Jan 2025",
     role: "Operations Apprentice — Terminal Operations",
     company: "Indian Oil Corporation",
+    logoSrc: logoIndianOil,
+    logoShort: "IO",
+    logoFrame: "flush" as const,
     desc: "Terminal operations: monitoring, SOP compliance, stock movement coordination, and safety process tracking in fuel terminal environments.",
     bullets: [
       "Monitor terminal activities and maintain operational logs",
@@ -56,6 +69,8 @@ const timeline = [
     year: "Aug 2022 — Feb 2024",
     role: "CX Specialist",
     company: "Tech Mahindra",
+    logoSrc: logoTechMahindra,
+    logoShort: "TM",
     desc: "Customer experience operations, quality improvements, SOP optimization, and operational coaching.",
     bullets: [
       "Customer support handling and CSAT improvement",
@@ -87,7 +102,9 @@ function ExperiencePage() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="mt-6 font-display text-fluid-hero leading-[0.88]"
           >
-            Where I've<br />worked.
+            Where I've
+            <br />
+            worked.
           </motion.h1>
         </div>
       </section>
@@ -106,11 +123,18 @@ function ExperiencePage() {
               >
                 <p className="md:col-span-3 text-xs uppercase tracking-[0.3em] text-muted-foreground tabular-nums">{t.year}</p>
                 <div className="md:col-span-4">
-                  <p className="font-display text-2xl">{t.role}</p>
-                  <p className="mt-1 text-sm text-accent">{t.company}</p>
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
+                    <CompanyLogoMark src={t.logoSrc} shortLabel={t.logoShort} name={t.company} frame={t.logoFrame ?? "card"} />
+                    <div className="min-w-0 flex-1">
+                      <p className="font-display text-2xl leading-[1.1]">{t.role}</p>
+                      <p className="mt-2 text-sm text-accent">{t.company}</p>
+                    </div>
+                  </div>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {t.focus.map((f) => (
-                      <span key={f} className="border border-border px-2.5 py-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{f}</span>
+                      <span key={f} className="border border-border px-2.5 py-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                        {f}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -118,14 +142,19 @@ function ExperiencePage() {
                   <p className="text-base text-muted-foreground">{t.desc}</p>
                   <ul className="space-y-1.5 text-sm text-muted-foreground">
                     {t.bullets.map((b) => (
-                      <li key={b} className="flex gap-3"><span className="text-accent">—</span>{b}</li>
+                      <li key={b} className="flex gap-3">
+                        <span className="text-accent">—</span>
+                        {b}
+                      </li>
                     ))}
                   </ul>
                   {t.achievements && (
                     <div className="border-l-2 border-accent pl-4">
                       <p className="text-[10px] uppercase tracking-[0.3em] text-accent">Recognition</p>
                       <ul className="mt-2 space-y-1 text-sm">
-                        {t.achievements.map((a) => <li key={a}>{a}</li>)}
+                        {t.achievements.map((a) => (
+                          <li key={a}>{a}</li>
+                        ))}
                       </ul>
                     </div>
                   )}
@@ -142,11 +171,13 @@ function ExperiencePage() {
           <h2 className="mt-6 font-display text-fluid-display">What I bring.</h2>
           <div className="mt-16 grid gap-px bg-border md:grid-cols-2">
             {skillGroups.map((g) => (
-              <div key={g.t} className="bg-surface p-10">
-                <h3 className="font-display text-2xl">{g.t}</h3>
+              <div key={g.t} className="bg-surface p-10 md:p-12">
+                <h3 className="font-display text-2xl tracking-tight">{g.t}</h3>
                 <ul className="mt-6 flex flex-wrap gap-2">
                   {g.items.map((s) => (
-                    <li key={s} className="border border-border px-3 py-1.5 text-xs">{s}</li>
+                    <li key={s} className="border border-border px-3 py-1.5 text-xs text-foreground/90">
+                      {s}
+                    </li>
                   ))}
                 </ul>
               </div>

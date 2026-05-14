@@ -1,5 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "motion/react";
+import { PageHero } from "@/components/page-hero";
+import { ScrollReveal } from "@/components/scroll-scenes";
+import scene1 from "@/assets/scene-1.jpg";
+import scene2 from "@/assets/scene-2.jpg";
+import scene3 from "@/assets/scene-3.jpg";
+import project1 from "@/assets/project-1.jpg";
+import project2 from "@/assets/project-2.jpg";
+import project3 from "@/assets/project-3.jpg";
+import project4 from "@/assets/project-4.jpg";
 
 type Section = { heading: string; items: string[] };
 type CaseData = {
@@ -7,6 +16,7 @@ type CaseData = {
   category: string;
   kind: "investigation" | "system";
   year: string;
+  image: string;
   intro: string;
   sections: Section[];
   risk?: string;
@@ -21,6 +31,7 @@ const cases: Record<string, CaseData> = {
     category: "Trust & Safety Operations",
     kind: "investigation",
     year: "2025",
+    image: scene3,
     intro:
       "Investigated a fraud pattern affecting customers placing Cash on Delivery orders. Customers reported scam calls within minutes of placing orders, where fraudsters already had access to names, phone numbers, addresses, and order details.",
     sections: [
@@ -57,6 +68,7 @@ const cases: Record<string, CaseData> = {
     category: "Trust & Safety Operations",
     kind: "investigation",
     year: "2025",
+    image: scene2,
     intro:
       "Investigated seller abuse cases where customers received pirated digital products, fake software links, cracked applications, and misleading product promises instead of genuine products.",
     sections: [
@@ -93,6 +105,7 @@ const cases: Record<string, CaseData> = {
     category: "Quality Operations & Audit Governance",
     kind: "investigation",
     year: "2025",
+    image: scene1,
     intro:
       "Investigated loopholes in audit tagging workflows where operational metrics looked healthy, but actual audit visibility and QA accuracy were being bypassed. Discovered when audit targets started dropping despite normal-looking dashboards.",
     sections: [
@@ -138,6 +151,7 @@ const cases: Record<string, CaseData> = {
     category: "QA Governance & Audit Workflow System",
     kind: "system",
     year: "2025",
+    image: project1,
     intro:
       "A quality management and audit workflow platform designed to centralize audit operations, scoring systems, rebuttal management, reporting workflows, and operational visibility. Built around common QA problems: inconsistent scoring, manual workflows, audit disputes, and limited accountability.",
     sections: [
@@ -164,6 +178,7 @@ const cases: Record<string, CaseData> = {
     category: "Process Governance & Escalation Visibility",
     kind: "system",
     year: "2025",
+    image: project2,
     intro:
       "A workflow system to track operational gaps, repeated failures, escalation ownership, and resolution accountability across QA, CX, and operations teams. Built around a common problem: teams repeatedly solving the same issues without visibility into past resolutions.",
     sections: [
@@ -190,6 +205,7 @@ const cases: Record<string, CaseData> = {
     category: "Unified Support Operations Workflow",
     kind: "system",
     year: "2025",
+    image: project3,
     intro:
       "A customer support workflow platform that brings WhatsApp, Instagram, Telegram, Twitter/X, and website conversations into one operational inbox. Focused on improving response times, escalation visibility, ticket management, and SLA handling.",
     sections: [
@@ -216,6 +232,7 @@ const cases: Record<string, CaseData> = {
     category: "EdTech Platform",
     kind: "system",
     year: "2024",
+    image: project4,
     intro:
       "A beginner-focused SQL learning platform designed to reduce confusion and fear around learning SQL. Instead of long technical tutorials, the platform uses small learning quests, simple datasets, and guided progression.",
     sections: [
@@ -273,82 +290,108 @@ function CasePage() {
 
   return (
     <article className="pt-32">
-      {/* Header */}
+      <PageHero chapter="02" label="Case Studies">
+        <p className="text-xs uppercase tracking-[0.3em] text-accent">
+          {c.kind === "investigation" ? "Case Study" : "Project"} · {c.year}
+        </p>
+        <motion.h1
+          initial={{ y: 48, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-4 font-display text-fluid-hero leading-[0.88]"
+        >
+          {c.title}
+        </motion.h1>
+        <p className="mt-6 text-xs uppercase tracking-[0.3em] text-muted-foreground">{c.category}</p>
+      </PageHero>
+
       <section className="px-6 lg:px-12">
-        <div className="mx-auto max-w-[1800px]">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">{c.kind === "investigation" ? "Case Study" : "Project"} · {c.year}</p>
-          <motion.h1
-            initial={{ y: 60, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 font-display text-fluid-hero leading-[0.88]"
-          >
-            {c.title}
-          </motion.h1>
-          <p className="mt-6 text-xs uppercase tracking-[0.3em] text-muted-foreground">{c.category}</p>
-        </div>
+        <ScrollReveal>
+          <div className="relative mx-auto max-w-[1800px] overflow-hidden border border-border bg-background">
+            <div className="relative aspect-[21/10] md:aspect-[21/8]">
+              <img
+                src={c.image}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+                width={1920}
+                height={900}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-background/20" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,oklch(0.12_0_0/0.75)_100%)]" />
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
 
-      {/* Intro */}
       <section className="px-6 py-24 lg:px-12">
         <div className="mx-auto grid max-w-[1800px] gap-12 lg:grid-cols-12">
-          <p className="lg:col-span-8 lg:col-start-3 text-2xl leading-snug md:text-3xl">{c.intro}</p>
+          <ScrollReveal className="lg:col-span-8 lg:col-start-3">
+            <p className="text-2xl leading-snug md:text-3xl">{c.intro}</p>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Sections */}
       {c.sections.map((s, i) => (
         <section key={s.heading} className={i % 2 === 0 ? "bg-surface px-6 py-24 lg:px-12" : "px-6 py-24 lg:px-12"}>
           <div className="mx-auto grid max-w-[1800px] gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-4">
+            <ScrollReveal className="lg:col-span-4">
               <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">0{i + 1}</p>
               <h2 className="mt-4 font-display text-fluid-display">{s.heading}</h2>
-            </div>
-            <ul className="lg:col-span-7 lg:col-start-6 divide-y divide-border border-y border-border">
-              {s.items.map((it) => (
-                <li key={it} className="flex gap-6 py-5">
-                  <span className="text-accent">—</span>
-                  <span className="text-lg">{it}</span>
-                </li>
-              ))}
-            </ul>
+            </ScrollReveal>
+            <ScrollReveal className="lg:col-span-7 lg:col-start-6">
+              <ul className="divide-y divide-border border-y border-border">
+                {s.items.map((it) => (
+                  <li key={it} className="flex gap-6 py-5">
+                    <span className="text-accent">—</span>
+                    <span className="text-lg">{it}</span>
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
           </div>
         </section>
       ))}
 
-      {/* Risk */}
       {c.risk && (
         <section className="px-6 py-24 lg:px-12">
-          <div className="mx-auto max-w-[1800px] border-l-4 border-accent pl-8">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Business Risk</p>
-            <p className="mt-4 font-display text-3xl md:text-4xl leading-snug max-w-4xl">{c.risk}</p>
-          </div>
+          <ScrollReveal>
+            <div className="mx-auto max-w-[1800px] border-l-4 border-accent pl-8">
+              <p className="text-xs uppercase tracking-[0.3em] text-accent">Business Risk</p>
+              <p className="mt-4 max-w-4xl font-display text-3xl leading-snug md:text-4xl">{c.risk}</p>
+            </div>
+          </ScrollReveal>
         </section>
       )}
 
-      {/* Skills / Focus */}
       {(c.skills || c.focus) && (
         <section className="bg-surface px-6 py-24 lg:px-12">
           <div className="mx-auto max-w-[1800px]">
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{c.skills ? "Skills used" : "Operational focus"}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              {(c.skills ?? c.focus ?? []).map((s) => (
-                <span key={s} className="border border-border bg-background px-5 py-3 text-sm">{s}</span>
-              ))}
-            </div>
+            <ScrollReveal>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{c.skills ? "Skills used" : "Operational focus"}</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {(c.skills ?? c.focus ?? []).map((s) => (
+                  <span key={s} className="border border-border bg-background px-5 py-3 text-sm">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </section>
       )}
 
-      {/* Next */}
       <section className="border-t border-border px-6 py-16 lg:px-12">
-        <div className="mx-auto flex max-w-[1800px] items-center justify-between">
-          <Link to="/work" className="text-xs uppercase tracking-[0.3em] hover:text-accent">← All work</Link>
-          <Link to="/case/$slug" params={{ slug: c.next.slug }} className="group text-right">
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Next</p>
-            <p className="font-display text-3xl group-hover:text-accent">{c.next.title} →</p>
-          </Link>
-        </div>
+        <ScrollReveal>
+          <div className="mx-auto flex max-w-[1800px] items-center justify-between">
+            <Link to="/work" className="text-xs uppercase tracking-[0.3em] hover:text-accent">
+              ← All work
+            </Link>
+            <Link to="/case/$slug" params={{ slug: c.next.slug }} className="group text-right">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Next</p>
+              <p className="font-display text-3xl group-hover:text-accent">{c.next.title} →</p>
+            </Link>
+          </div>
+        </ScrollReveal>
       </section>
     </article>
   );

@@ -8,10 +8,11 @@ import scene3 from "@/assets/scene-3.jpg";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+/* Images matched to chapter: journey/logistics → fraud & delivery; keyboard → audit & data; city → systems at scale */
 const scenes = [
-  { img: scene1, eyebrow: "Chapter I — Trust & Safety", title: "Find the fraud pattern.", body: "Investigate seller abuse, COD scam patterns, and operational leakage before they scale into trust damage." },
+  { img: scene3, eyebrow: "Chapter I — Trust & Safety", title: "Find the fraud pattern.", body: "Investigate seller abuse, COD scam patterns, and operational leakage before they scale into trust damage." },
   { img: scene2, eyebrow: "Chapter II — Audit Governance", title: "Close the loophole.", body: "Identify tagging gaps, false metrics, and incentive leakage that hide real operational risk." },
-  { img: scene3, eyebrow: "Chapter III — CX Workflow", title: "Build the system.", body: "Design workflows for escalation visibility, ownership, and resolution accountability across teams." },
+  { img: scene1, eyebrow: "Chapter III — CX Workflow", title: "Build the system.", body: "Design workflows for escalation visibility, ownership, and resolution accountability across teams." },
 ];
 
 /**
@@ -93,7 +94,11 @@ export function TrailerScenes() {
   );
 
   return (
-    <section ref={root} className="relative h-[100svh] w-full overflow-hidden bg-background">
+    <section
+      ref={root}
+      id="header-brand-gate"
+      className="relative h-[100svh] w-full overflow-hidden bg-background"
+    >
       {scenes.map((s, i) => (
         <div key={i} className="trailer-slide absolute inset-0 will-change-transform">
           <div className="trailer-img absolute inset-0 will-change-transform">

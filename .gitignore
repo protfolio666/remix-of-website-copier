@@ -16,6 +16,9 @@ dist-ssr
 .nitro
 *.local
 
+# Netlify (generated during `vite build` with @netlify/vite-plugin-tanstack-start)
+.netlify/
+
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars

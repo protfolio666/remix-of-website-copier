@@ -22,10 +22,11 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+/* Investigations: COD → journey/logistics; seller abuse → digital/keyboard; incentive leakage → city-scale systems */
 const investigations = [
-  { slug: "cod-fraud", title: "COD Fraud Investigation", role: "Trust & Safety · 2025", image: scene1 },
+  { slug: "cod-fraud", title: "COD Fraud Investigation", role: "Trust & Safety · 2025", image: scene3 },
   { slug: "seller-abuse", title: "Seller Abuse & Pirated Products", role: "Trust & Safety · 2025", image: scene2 },
-  { slug: "incentive-leakage", title: "Incentive Leakage in CX Metrics", role: "Audit Governance · 2025", image: scene3 },
+  { slug: "incentive-leakage", title: "Incentive Leakage in CX Metrics", role: "Audit Governance · 2025", image: scene1 },
 ];
 
 const systems = [
@@ -49,7 +50,31 @@ function Home() {
     <>
       <CinematicHero />
       <TrailerScenes />
-      <Marquee items={["Trust & Safety", "Fraud Ops", "QA Governance", "RCA", "CX", "Workflow Design"]} />
+      <Marquee
+        items={[
+          "Trust & Safety",
+          "Fraud Ops",
+          "QA Governance",
+          "RCA",
+          "CX",
+          "Workflow Design",
+          "Honor of Kings India (Tencent) — Freelance",
+          "Wyzmindz",
+          "Indian Oil Corporation",
+          "Tech Mahindra",
+        ]}
+      />
+
+      <section className="border-y border-border bg-background px-6 py-20 lg:px-12 lg:py-28">
+        <div className="mx-auto max-w-[1800px]">
+          <ScrollReveal>
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">00 — Index</p>
+            <h2 className="mt-4 max-w-4xl font-display text-fluid-xl leading-[0.95] md:text-fluid-display">
+              Operations, investigations, and workflow systems — built for visibility.
+            </h2>
+          </ScrollReveal>
+        </div>
+      </section>
 
       <StickyChapter number="01 — About" title="Operations is where the truth lives.">
         <ScrollReveal>
@@ -88,7 +113,7 @@ function Home() {
         </div>
       </section>
 
-      <HorizontalGallery items={investigations} />
+      <HorizontalGallery items={investigations} eyebrow="03 — Case Studies" title="Selected investigations." />
 
       <StickyChapter number="03 — Case Studies" title="Real investigations, written in detail." invert>
         <div className="divide-y divide-border border-y border-border">

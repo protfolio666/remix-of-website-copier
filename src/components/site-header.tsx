@@ -1,8 +1,8 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import heroImg from "@/assets/hero.jpg";
-import portrait from "@/assets/portrait.jpg";
+import portrait from "@/assets/portrait.png";
 import scene1 from "@/assets/scene-1.jpg";
 import scene2 from "@/assets/scene-2.jpg";
 import scene3 from "@/assets/scene-3.jpg";
@@ -40,7 +40,7 @@ const links: NavItem[] = [
     to: "/work",
     label: "Case Studies",
     num: "02",
-    image: scene1,
+    image: scene3,
     eyebrow: "02 — Case Studies",
     title: "Investigations.",
     body: "Fraud patterns, audit loopholes, and process gaps — written in detail.",
@@ -66,16 +66,48 @@ const links: NavItem[] = [
 ];
 
 export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const [scrollY, setScrollY] = useState(0);
+  const [gateBasedBrand, setGateBasedBrand] = useState(false);
   const [open, setOpen] = useState(false);
-  const [hovered, setHovered] = useState<NavItem | null>(null);
+
+  const useBrandGate = pathname === "/" || pathname === "/about";
+  const showBrand = useBrandGate ? gateBasedBrand : true;
+  const denseHeader = useBrandGate ? gateBasedBrand && scrollY > 40 : scrollY > 40;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrollY(window.scrollY);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!useBrandGate) return;
+
+    const updateFromGate = () => {
+      if (pathname === "/about") {
+        const mark = document.getElementById("header-intro-end");
+        if (mark) {
+          setGateBasedBrand(mark.getBoundingClientRect().top < 88);
+          return;
+        }
+      }
+
+      const gate = document.getElementById("header-brand-gate");
+      if (!gate) return;
+      const vh = window.innerHeight;
+      setGateBasedBrand(gate.getBoundingClientRect().top < vh);
+    };
+
+    updateFromGate();
+    window.addEventListener("scroll", updateFromGate, { passive: true });
+    window.addEventListener("resize", updateFromGate);
+    return () => {
+      window.removeEventListener("scroll", updateFromGate);
+      window.removeEventListener("resize", updateFromGate);
+    };
+  }, [useBrandGate, pathname]);
 
   // Lock scroll when drawer open
   useEffect(() => {
@@ -87,43 +119,28 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* Cinematic hover preview layer (desktop) */}
-      <HoverPreview item={hovered} />
-
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          scrolled || hovered
+          denseHeader
             ? "bg-background/85 backdrop-blur-md border-b border-border"
             : "bg-transparent"
         }`}
       >
         <div className="mx-auto flex max-w-[1800px] items-center justify-between px-6 py-5 lg:px-12">
-          <Link to="/" className="font-display text-2xl tracking-tight">
+          <Link
+            to="/"
+            aria-label="Home"
+            className={`font-display text-2xl tracking-tight transition-opacity duration-500 focus-visible:pointer-events-auto focus-visible:opacity-100 ${
+              !showBrand ? "pointer-events-none opacity-0" : "opacity-100"
+            }`}
+          >
             ABHISHEK<span className="text-accent">·</span>DAS
           </Link>
 
-          <nav
-            className="hidden items-center gap-10 md:flex"
-            onMouseLeave={() => setHovered(null)}
-          >
-            {links.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                onMouseEnter={() => setHovered(l)}
-                className="group relative text-[11px] uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-foreground"
-                activeProps={{ className: "text-foreground" }}
-                activeOptions={{ exact: l.to === "/" }}
-              >
-                {l.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-500 group-hover:w-full" />
-              </Link>
-            ))}
-          </nav>
-
           <button
+            type="button"
             onClick={() => setOpen(true)}
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+            className="flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-2"
             aria-label="Open menu"
           >
             <span className="h-px w-7 bg-foreground" />
@@ -135,92 +152,6 @@ export function SiteHeader() {
       {/* Cinematic full-screen drawer */}
       <CinematicDrawer open={open} onClose={() => setOpen(false)} />
     </>
-  );
-}
-
-/* ---------- Hover preview ---------- */
-
-function HoverPreview({ item }: { item: NavItem | null }) {
-  return (
-    <AnimatePresence mode="wait">
-      {item && (
-        <motion.div
-          key={item.to}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-none fixed inset-0 z-40 hidden md:block"
-        >
-          {/* Image with slow ken-burns */}
-          <motion.div
-            key={item.image}
-            initial={{ scale: 1.06 }}
-            animate={{ scale: 1.18 }}
-            transition={{ duration: 6, ease: "linear" }}
-            className="absolute inset-0"
-          >
-            <img
-              src={item.image}
-              alt=""
-              className="h-full w-full object-cover"
-            />
-          </motion.div>
-          {/* Cinematic gradients & vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/40" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,oklch(0.12_0_0/0.85)_100%)]" />
-
-          {/* Letterbox bars */}
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            exit={{ scaleY: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 top-0 h-[6vh] origin-top bg-background"
-          />
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            exit={{ scaleY: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 bottom-0 h-[6vh] origin-bottom bg-background"
-          />
-
-          {/* Caption */}
-          <div className="absolute inset-0 flex items-end px-6 pb-24 lg:px-12 lg:pb-32">
-            <div className="max-w-3xl">
-              <motion.p
-                initial={{ y: 24, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="text-xs uppercase tracking-[0.4em] text-accent"
-              >
-                {item.eyebrow}
-              </motion.p>
-              <motion.h3
-                initial={{ y: 40, opacity: 0, filter: "blur(12px)" }}
-                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                transition={{ delay: 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-4 font-display text-fluid-display leading-[0.9]"
-              >
-                {item.title}
-              </motion.h3>
-              <motion.p
-                initial={{ y: 24, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.25, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-6 max-w-md text-base text-foreground/80"
-              >
-                {item.body}
-              </motion.p>
-            </div>
-          </div>
-
-          {/* grain */}
-          <div className="absolute inset-0 mix-blend-overlay opacity-30 [background-image:radial-gradient(oklch(0.95_0_0/0.15)_1px,transparent_1px)] [background-size:3px_3px]" />
-        </motion.div>
-      )}
-    </AnimatePresence>
   );
 }
 
@@ -275,12 +206,13 @@ function CinematicDrawer({ open, onClose }: { open: boolean; onClose: () => void
             className="absolute inset-x-0 bottom-0 h-[8vh] origin-bottom bg-background z-10"
           />
 
-          {/* Header bar inside drawer */}
-          <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 py-5 lg:px-12">
+          {/* Header bar inside drawer — above full-bleed content grid so Close stays clickable */}
+          <div className="absolute inset-x-0 top-0 z-[30] flex items-center justify-between px-6 py-5 lg:px-12">
             <span className="font-display text-2xl">
               ABHISHEK<span className="text-accent">·</span>DAS
             </span>
             <button
+              type="button"
               onClick={onClose}
               className="text-[11px] uppercase tracking-[0.4em] hover:text-accent"
               aria-label="Close menu"
@@ -338,7 +270,7 @@ function CinematicDrawer({ open, onClose }: { open: boolean; onClose: () => void
           </div>
 
           {/* footer meta */}
-          <div className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between px-6 py-5 text-[10px] uppercase tracking-[0.4em] text-muted-foreground lg:px-12">
+          <div className="absolute inset-x-0 bottom-0 z-[30] flex items-center justify-between px-6 py-5 text-[10px] uppercase tracking-[0.4em] text-muted-foreground lg:px-12">
             <span>India · 2026</span>
             <a href="mailto:abhishek@solvextra.com" className="hover:text-accent">abhishek@solvextra.com</a>
           </div>

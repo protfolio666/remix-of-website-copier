@@ -115,9 +115,6 @@ export function TrailerScenes() {
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
-
           <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-20 lg:px-12 lg:pb-28">
             <p className="trailer-eyebrow text-xs uppercase tracking-[0.4em] text-accent will-change-transform">
               {s.eyebrow}

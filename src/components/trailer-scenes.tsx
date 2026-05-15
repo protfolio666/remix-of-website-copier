@@ -155,6 +155,9 @@ export function TrailerScenes() {
         <div className="trailer-progress h-full origin-left scale-x-0 bg-accent" />
       </div>
 
+      {/* Blackout overlay — drives the dip-to-black between scenes */}
+      <div className="trailer-blackout pointer-events-none absolute inset-0 z-[15] bg-background opacity-0" />
+
       <div className="absolute bottom-6 right-6 z-20 lg:bottom-8 lg:right-12">
         <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Scroll ↓</p>
       </div>

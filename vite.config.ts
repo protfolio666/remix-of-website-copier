@@ -10,10 +10,15 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
 // Netlify: @netlify/vite-plugin-tanstack-start prepares the production bundle; disable the
 // Cloudflare Workers build plugin (otherwise wrangler output wins over Netlify’s layout).
+// Netlify plugin only during production builds — on Windows, loading it in `vite dev` can
+// throw EPERM while updating %AppData%/netlify/Config (see Netlify dev-utils GlobalConfigStore).
+const netlifyPlugins =
+  process.env.npm_lifecycle_event === "build" || process.env.NETLIFY === "true" ? [netlify()] : [];
+
 export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
   cloudflare: false,
-  plugins: [netlify()],
+  plugins: netlifyPlugins,
 });

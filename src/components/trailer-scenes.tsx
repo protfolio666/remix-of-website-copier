@@ -49,6 +49,24 @@ export function TrailerScenes() {
       // This avoids the dark gap where both slides were partially transparent.
       gsap.set(slides, { opacity: 1, zIndex: (i) => total - i });
 
+      // fade-in overlay: dissolves from black at the section entry
+      tl.fromTo(".trailer-entry-fade", { opacity: 1 }, { opacity: 0, ease: "power2.inOut", duration: 0.15 }, 0);
+
+      // Restore cinematic-fx overlay that was faded out during hero exit
+      const fxEl = document.querySelector(".cinematic-fx");
+      if (fxEl) {
+        gsap.fromTo(fxEl, { opacity: 0 }, {
+          opacity: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top top",
+            end: "+=20%",
+            scrub: 1,
+          },
+        });
+      }
+
       slides.forEach((slide, i) => {
         const img = slide.querySelector(".trailer-img");
         const eyebrow = slide.querySelector(".trailer-eyebrow");
@@ -149,6 +167,9 @@ export function TrailerScenes() {
       {/* Shared overlays — sit above all slides so they don't fade with the dissolve */}
       <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-t from-background via-background/40 to-background/10" />
       <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-background/60 via-transparent to-transparent" />
+
+      {/* Entry fade — fixed above cinematic-fx for clean dissolve from black */}
+      <div className="trailer-entry-fade pointer-events-none fixed inset-0 z-[80] bg-black" />
 
       {/* progress bar */}
       <div className="absolute inset-x-0 top-0 z-20 h-px bg-foreground/10">

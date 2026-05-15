@@ -135,6 +135,10 @@ export function TrailerScenes() {
         </div>
       ))}
 
+      {/* Shared overlays — sit above all slides so they don't fade with the dissolve */}
+      <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-t from-background via-background/40 to-background/10" />
+      <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-background/60 via-transparent to-transparent" />
+
       {/* progress bar */}
       <div className="absolute inset-x-0 top-0 z-20 h-px bg-foreground/10">
         <div className="trailer-progress h-full origin-left scale-x-0 bg-accent" />

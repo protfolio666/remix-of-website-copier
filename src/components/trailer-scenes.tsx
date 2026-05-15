@@ -44,9 +44,10 @@ export function TrailerScenes() {
         },
       });
 
-      // initial state: only first slide visible
-      gsap.set(slides, { opacity: 0 });
-      gsap.set(slides[0], { opacity: 1 });
+      // initial state: all slides fully visible & stacked — we crossfade by fading
+      // the OUTGOING slide on top of the next one (which is already at opacity 1).
+      // This avoids the dark gap where both slides were partially transparent.
+      gsap.set(slides, { opacity: 1, zIndex: (i) => total - i });
 
       slides.forEach((slide, i) => {
         const img = slide.querySelector(".trailer-img");
@@ -58,7 +59,7 @@ export function TrailerScenes() {
         // Slow cinematic Ken-Burns across the full slide window
         tl.fromTo(img, { scale: 1.08, yPercent: 4 }, { scale: 1.32, yPercent: -4, ease: "none" }, i);
 
-        // text in (slower, longer hold)
+        // text in
         tl.fromTo(
           [eyebrow, title, body, num],
           { y: 80, opacity: 0, filter: "blur(18px)" },
@@ -66,15 +67,18 @@ export function TrailerScenes() {
           i + 0.05,
         );
 
-        // text out + crossfade (longer overlap, like a film dissolve)
+        // text out + smooth dissolve to next slide (no gap — next slide is already opaque underneath)
         if (i < total - 1) {
           tl.to(
             [eyebrow, title, body, num],
-            { y: -80, opacity: 0, filter: "blur(14px)", stagger: 0.05, ease: "power2.in", duration: 0.35 },
-            i + 0.6,
+            { y: -60, opacity: 0, filter: "blur(14px)", stagger: 0.05, ease: "power2.in", duration: 0.45 },
+            i + 0.55,
           );
-          tl.to(slide, { opacity: 0, ease: "power1.inOut", duration: 0.5 }, i + 0.7);
-          tl.to(slides[i + 1], { opacity: 1, ease: "power1.inOut", duration: 0.5 }, i + 0.7);
+          tl.to(
+            slide,
+            { opacity: 0, ease: "sine.inOut", duration: 0.9 },
+            i + 0.55,
+          );
         }
       });
 

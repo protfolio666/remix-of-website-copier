@@ -56,8 +56,8 @@ export function TrailerScenes() {
         const body = slide.querySelector(".trailer-body");
         const num = slide.querySelector(".trailer-num");
 
-        // Slow cinematic Ken-Burns across the full slide window
-        tl.fromTo(img, { scale: 1.08, yPercent: 4 }, { scale: 1.32, yPercent: -4, ease: "none" }, i);
+        // Slow cinematic Ken-Burns — keep scale high & y movement tiny so image always covers edges
+        tl.fromTo(img, { scale: 1.18, yPercent: 1.5 }, { scale: 1.3, yPercent: -1.5, ease: "none" }, i);
 
         // text in
         tl.fromTo(

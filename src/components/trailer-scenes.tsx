@@ -67,17 +67,28 @@ export function TrailerScenes() {
           i + 0.05,
         );
 
-        // text out + smooth dissolve to next slide (no gap — next slide is already opaque underneath)
+        // text out + dip-to-black transition: outgoing fades to black FIRST,
+        // then a "black flash" overlay fades back out revealing next slide.
+        // This hides the fact that two very different photos are stacked.
         if (i < total - 1) {
           tl.to(
             [eyebrow, title, body, num],
-            { y: -60, opacity: 0, filter: "blur(14px)", stagger: 0.05, ease: "power2.in", duration: 0.45 },
+            { y: -60, opacity: 0, filter: "blur(14px)", stagger: 0.04, ease: "power2.in", duration: 0.35 },
             i + 0.55,
           );
+          // outgoing image dips to black via its own dark veil + opacity
+          tl.to(slide, { opacity: 0, ease: "power2.in", duration: 0.45 }, i + 0.6);
+          // global blackout overlay (sits above everything during the dip)
+          tl.fromTo(
+            ".trailer-blackout",
+            { opacity: 0 },
+            { opacity: 1, ease: "power2.in", duration: 0.4 },
+            i + 0.65,
+          );
           tl.to(
-            slide,
-            { opacity: 0, ease: "sine.inOut", duration: 0.9 },
-            i + 0.55,
+            ".trailer-blackout",
+            { opacity: 0, ease: "power2.out", duration: 0.4 },
+            i + 1.05,
           );
         }
       });
@@ -143,6 +154,9 @@ export function TrailerScenes() {
       <div className="absolute inset-x-0 top-0 z-20 h-px bg-foreground/10">
         <div className="trailer-progress h-full origin-left scale-x-0 bg-accent" />
       </div>
+
+      {/* Blackout overlay — drives the dip-to-black between scenes */}
+      <div className="trailer-blackout pointer-events-none absolute inset-0 z-[15] bg-background opacity-0" />
 
       <div className="absolute bottom-6 right-6 z-20 lg:bottom-8 lg:right-12">
         <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Scroll ↓</p>

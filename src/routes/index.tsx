@@ -73,48 +73,82 @@ function Home() {
         ]}
       />
 
-      <section className="border-y border-border bg-background px-6 py-20 lg:px-12 lg:py-28">
-        <div className="mx-auto max-w-[1800px]">
-          <ScrollReveal>
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">00 — Index</p>
-            <h2 className="mt-4 max-w-4xl font-display text-fluid-xl leading-[0.95] md:text-fluid-display">
-              Operations, investigations, and workflow systems — built for visibility.
-            </h2>
+      {/* 01 — About: cinematic split */}
+      <section className="relative overflow-hidden border-y border-border bg-background px-6 py-32 lg:px-12 lg:py-48">
+        <div className="mx-auto grid max-w-[1800px] gap-16 lg:grid-cols-12 lg:gap-20">
+          <ScrollReveal className="lg:col-span-5">
+            <div className="relative aspect-[4/5] w-full overflow-hidden">
+              <img
+                src={portrait}
+                alt="Abhishek Das"
+                className="absolute inset-0 h-full w-full object-cover grayscale contrast-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 text-[10px] uppercase tracking-[0.4em] text-foreground/70">
+                01 — Operator
+              </div>
+            </div>
           </ScrollReveal>
+          <div className="lg:col-span-7 lg:pl-8">
+            <ScrollReveal>
+              <p className="text-[10px] uppercase tracking-[0.4em] text-accent">01 — About</p>
+            </ScrollReveal>
+            <ScrollReveal>
+              <h2 className="mt-6 font-display text-fluid-display leading-[0.9]">
+                Operations is <span className="text-accent">where the truth lives.</span>
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal>
+              <p className="mt-10 max-w-xl text-xl leading-snug text-foreground/85 md:text-2xl">
+                I work in operations, quality, CX, and trust & safety — environments that handle
+                large volumes of customers, audits, escalations, and workflows every day.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal>
+              <p className="mt-6 max-w-xl text-base text-muted-foreground">
+                My focus is identifying operational problems before they become bigger business
+                risks — and designing systems that improve visibility, accountability, and customer
+                experience.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal>
+              <Link
+                to="/about"
+                className="mt-12 inline-flex items-center gap-3 border-b border-foreground pb-1 text-xs uppercase tracking-[0.3em] hover:border-accent hover:text-accent"
+              >
+                More about me <span>→</span>
+              </Link>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
-      <StickyChapter number="01 — About" title="Operations is where the truth lives.">
-        <ScrollReveal>
-          <p className="text-2xl leading-snug md:text-3xl">
-            I work in operations, quality, CX, and trust & safety — environments that handle large volumes of customers, audits, escalations, and workflows every day.
-          </p>
-        </ScrollReveal>
-        <ScrollReveal>
-          <p className="max-w-xl text-base text-muted-foreground">
-            My focus is identifying operational problems before they become bigger business risks — and designing systems that improve visibility, accountability, and customer experience.
-          </p>
-        </ScrollReveal>
-        <ScrollReveal>
-          <Link to="/about" className="inline-flex items-center gap-3 border-b border-foreground pb-1 text-xs uppercase tracking-[0.3em] hover:text-accent hover:border-accent">
-            More about me <span>→</span>
-          </Link>
-        </ScrollReveal>
-      </StickyChapter>
-
-      <section className="px-6 py-32 lg:px-12 lg:py-48">
+      {/* 02 — Capabilities: numbered cinematic grid */}
+      <section className="relative bg-surface px-6 py-32 lg:px-12 lg:py-48">
         <div className="mx-auto max-w-[1800px]">
-          <ScrollReveal>
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">02 — What I Solve</p>
-          </ScrollReveal>
-          <ScrollReveal>
-            <h2 className="mt-6 font-display text-fluid-display max-w-3xl">Operational problems, investigated and systemized.</h2>
-          </ScrollReveal>
-          <div className="mt-16 grid gap-px bg-border md:grid-cols-2 lg:grid-cols-3">
-            {capabilities.map((c) => (
-              <div key={c.t} className="bg-background p-10">
-                <h3 className="font-display text-2xl">{c.t}</h3>
-                <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{c.d}</p>
+          <div className="flex flex-wrap items-end justify-between gap-6 border-b border-foreground/15 pb-8">
+            <ScrollReveal>
+              <p className="text-[10px] uppercase tracking-[0.4em] text-accent">02 — What I Solve</p>
+              <h2 className="mt-4 font-display text-fluid-display max-w-3xl leading-[0.9]">
+                Operational problems, investigated and systemized.
+              </h2>
+            </ScrollReveal>
+            <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground">
+              06 capabilities
+            </p>
+          </div>
+          <div className="mt-12 grid gap-px bg-foreground/10 md:grid-cols-2 lg:grid-cols-3">
+            {capabilities.map((c, i) => (
+              <div
+                key={c.t}
+                className="group relative overflow-hidden bg-surface p-10 transition-colors hover:bg-background"
+              >
+                <span className="font-display text-6xl text-foreground/15 tabular-nums transition-colors group-hover:text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-6 font-display text-2xl leading-tight">{c.t}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{c.d}</p>
+                <div className="mt-8 h-px w-12 bg-foreground/30 transition-all duration-500 group-hover:w-full group-hover:bg-accent" />
               </div>
             ))}
           </div>
@@ -123,77 +157,72 @@ function Home() {
 
       <HorizontalGallery items={investigations} eyebrow="03 — Case Studies" title="Selected investigations." />
 
-      <StickyChapter number="03 — Case Studies" title="Real investigations, written in detail." invert>
-        <div className="divide-y divide-border border-y border-border">
-          {investigations.map((p, i) => (
-            <ScrollReveal key={p.slug}>
-              <Link
-                to="/case/$slug"
-                params={{ slug: p.slug }}
-                className="group flex items-center justify-between gap-6 py-8 px-2 transition-colors hover:bg-background"
-              >
-                <div className="flex items-center gap-8">
-                  <span className="text-xs text-muted-foreground tabular-nums">0{i + 1}</span>
-                  <h3 className="font-display text-3xl md:text-5xl group-hover:text-accent transition-colors">
-                    {p.title}
-                  </h3>
-                </div>
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground group-hover:text-foreground">
-                  Read →
-                </span>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
-      </StickyChapter>
+      {/* 04 — Case studies: cinematic hover list */}
+      <CinematicRowList
+        number="04 — Case Studies"
+        title="Real investigations, written in detail."
+        rows={investigations.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          role: p.role,
+          image: p.image,
+        }))}
+        invert
+      />
 
-      <StickyChapter number="04 — Systems" title="Workflow platforms designed around real problems.">
-        <div className="divide-y divide-border border-y border-border">
-          {systems.map((p, i) => (
-            <ScrollReveal key={p.slug}>
-              <Link
-                to="/case/$slug"
-                params={{ slug: p.slug }}
-                className="group flex items-center justify-between gap-6 py-8 px-2 transition-colors hover:bg-surface"
-              >
-                <div className="flex items-center gap-8">
-                  <span className="text-xs text-muted-foreground tabular-nums">0{i + 1}</span>
-                  <div>
-                    <h3 className="font-display text-3xl md:text-5xl group-hover:text-accent transition-colors">
-                      {p.title}
-                    </h3>
-                    <p className="mt-1 text-xs uppercase tracking-[0.25em] text-muted-foreground">{p.role}</p>
-                  </div>
-                </div>
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground group-hover:text-foreground">
-                  View →
-                </span>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
-      </StickyChapter>
+      {/* 05 — Systems: cinematic hover list */}
+      <CinematicRowList
+        number="05 — Systems"
+        title="Workflow platforms designed around real problems."
+        rows={systems.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          role: p.role,
+          image: p.image,
+        }))}
+      />
 
-      <section className="relative px-6 py-32 lg:px-12 lg:py-48">
-        <div className="mx-auto max-w-[1800px]">
+      {/* 06 — Contact: full-bleed cinematic */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={scene3} alt="" className="h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/50" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,oklch(0.10_0_0/0.9)_100%)]" />
+        </div>
+
+        {/* letterbox bars */}
+        <div className="absolute inset-x-0 top-0 z-10 h-[6vh] bg-background" />
+        <div className="absolute inset-x-0 bottom-0 z-10 h-[6vh] bg-background" />
+
+        <div className="relative z-20 mx-auto flex min-h-[100svh] max-w-[1800px] flex-col justify-center px-6 py-40 lg:px-12">
           <ScrollReveal>
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">05 — Contact</p>
+            <p className="text-[10px] uppercase tracking-[0.4em] text-accent">06 — Contact</p>
           </ScrollReveal>
           <ScrollReveal>
-            <h2 className="mt-6 font-display text-fluid-hero leading-[0.9]">
-              Let's<br />build<br /><span className="text-accent">visibility.</span>
+            <h2 className="mt-8 font-display text-fluid-hero leading-[0.85]">
+              Let's
+              <br />
+              build
+              <br />
+              <span className="text-accent">visibility.</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal>
-            <Link
-              to="/contact"
-              className="mt-12 inline-flex items-center gap-4 border border-foreground px-8 py-4 text-sm uppercase tracking-[0.3em] hover:bg-foreground hover:text-background"
-            >
-              Start a conversation <span>→</span>
-            </Link>
+            <div className="mt-14 flex flex-wrap items-center gap-8">
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-4 border border-foreground px-10 py-5 text-xs uppercase tracking-[0.4em] transition-colors hover:bg-foreground hover:text-background"
+              >
+                Start a conversation
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+              <a
+                href="mailto:abhishek@solvextra.com"
+                className="text-xs uppercase tracking-[0.4em] text-muted-foreground hover:text-accent"
+              >
+                abhishek@solvextra.com
+              </a>
+            </div>
           </ScrollReveal>
         </div>
       </section>
-    </>
-  );
-}

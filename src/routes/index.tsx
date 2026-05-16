@@ -59,16 +59,10 @@ function Home() {
       <TrailerScenes />
       <Marquee
         items={[
-          "Trust & Safety",
-          "Fraud Ops",
-          "QA Governance",
-          "RCA",
-          "CX",
-          "Workflow Design",
-          "Honor of Kings India (Tencent) — Freelance",
-          "Wyzmindz",
-          "Indian Oil Corporation",
-          "Tech Mahindra",
+          { name: "Tencent", logo: tencentLogo },
+          { name: "Wyzmindz", logo: wyzmindzLogo },
+          { name: "Indian Oil", logo: indianOilLogo },
+          { name: "Tech Mahindra", logo: techMahindraLogo },
         ]}
       />
 

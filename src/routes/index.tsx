@@ -12,6 +12,10 @@ import project4 from "@/assets/project-4.jpg";
 import caseCodFraud from "@/assets/case-cod-fraud.png";
 import caseIncentiveLeakage from "@/assets/case-incentive-leakage.png";
 import scene2 from "@/assets/scene-2.jpg";
+import tencentLogo from "@/assets/logos/tencent.png";
+import wyzmindzLogo from "@/assets/logos/wyzmindz.png";
+import indianOilLogo from "@/assets/logos/indian-oil.png";
+import techMahindraLogo from "@/assets/logos/tech-mahindra.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({

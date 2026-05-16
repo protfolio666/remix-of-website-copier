@@ -226,3 +226,6 @@ function Home() {
           </ScrollReveal>
         </div>
       </section>
+    </>
+  );
+}

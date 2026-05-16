@@ -3,7 +3,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import heroImg from "@/assets/hero.jpg";
-import portraitBw from "@/assets/portrait-bw.png";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -29,12 +28,6 @@ export function CinematicHero() {
 
       tl.fromTo(".hero-bg", { scale: 1.15 }, { scale: 1.45, yPercent: -8, ease: "none" }, 0)
         .to(".hero-overlay", { opacity: 1, ease: "none" }, 0)
-        .fromTo(
-          ".hero-portrait",
-          { xPercent: 8, opacity: 1, scale: 1.02, filter: "blur(0px)" },
-          { xPercent: -4, opacity: 0, scale: 1.08, filter: "blur(8px)", ease: "none" },
-          0,
-        )
         .to(".hero-eyebrow", { yPercent: -120, opacity: 0, filter: "blur(8px)", ease: "none" }, 0)
         .to(".hero-word-1", { yPercent: -180, opacity: 0, filter: "blur(12px)", ease: "none" }, 0)
         .to(".hero-word-2", { yPercent: -260, opacity: 0, filter: "blur(14px)", ease: "none" }, 0.05)
@@ -64,24 +57,6 @@ export function CinematicHero() {
 
       <div className="hero-overlay absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30 opacity-50" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,oklch(0.12_0_0/0.7)_100%)]" />
-
-      {/* Cinematic side portrait — GTA VI style */}
-      <div className="hero-portrait pointer-events-none absolute inset-y-0 right-0 z-[5] hidden w-[55%] will-change-transform md:block lg:w-[48%]">
-        <img
-          src={portraitBw}
-          alt="Abhishek Das portrait"
-          className="absolute inset-y-0 right-0 h-full w-auto object-cover object-left grayscale contrast-110"
-          style={{
-            maskImage:
-              "linear-gradient(to left, black 55%, transparent 100%), linear-gradient(to top, transparent 0%, black 18%)",
-            WebkitMaskImage:
-              "linear-gradient(to left, black 55%, transparent 100%), linear-gradient(to top, transparent 0%, black 18%)",
-            maskComposite: "intersect",
-            WebkitMaskComposite: "source-in",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/10 to-background/60" />
-      </div>
 
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex-1" />

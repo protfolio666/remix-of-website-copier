@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import portrait from "@/assets/portrait.jpg";
+import portraitBw from "@/assets/portrait-bw.png";
 import scene1 from "@/assets/scene-1.jpg";
 import scene2 from "@/assets/scene-2.jpg";
 import scene3 from "@/assets/scene-3.jpg";
@@ -62,13 +63,31 @@ export function CinematicJourney() {
       body: "I investigate operational problems, fraud patterns, audit loopholes, and workflow failures — then design systems that improve visibility, accountability, and customer experience.",
       num: "04",
       overlay: (
-        <div className="absolute bottom-28 left-6 z-20 flex flex-wrap gap-3 lg:left-12">
-          {["3.5+ Yrs", "9000+ Audits", "Fraud Investigations", "Workflow Systems"].map((s) => (
-            <span key={s} className="border border-foreground/40 bg-background/30 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] backdrop-blur-sm">
-              {s}
-            </span>
-          ))}
-        </div>
+        <>
+          {/* Cinematic side portrait — GTA VI style */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-[5] hidden w-[55%] md:block lg:w-[50%]">
+            <img
+              src={portraitBw}
+              alt="Abhishek Das portrait"
+              className="absolute inset-y-0 right-0 h-full w-auto object-cover object-left grayscale contrast-110"
+              style={{
+                maskImage:
+                  "linear-gradient(to left, black 50%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to left, black 50%, transparent 100%)",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/20 to-background/70" />
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background to-transparent" />
+          </div>
+          <div className="absolute bottom-28 left-6 z-20 flex flex-wrap gap-3 lg:left-12">
+            {["3.5+ Yrs", "9000+ Audits", "Fraud Investigations", "Workflow Systems"].map((s) => (
+              <span key={s} className="border border-foreground/40 bg-background/30 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] backdrop-blur-sm">
+                {s}
+              </span>
+            ))}
+          </div>
+        </>
       ),
     },
     {

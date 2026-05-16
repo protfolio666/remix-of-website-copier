@@ -18,16 +18,16 @@ export function CinematicHero() {
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: "+=180%",
-          scrub: 1,
+          end: "+=260%",
+          scrub: 1.4,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
 
-      tl.fromTo(".hero-bg", { scale: 1.15 }, { scale: 1.35, yPercent: -6, ease: "none" }, 0)
-        .to(".hero-overlay", { opacity: 1, ease: "none", duration: 0.6 }, 0)
+      tl.fromTo(".hero-bg", { scale: 1.15 }, { scale: 1.45, yPercent: -8, ease: "none" }, 0)
+        .to(".hero-overlay", { opacity: 1, ease: "none" }, 0)
         .to(".hero-eyebrow", { yPercent: -120, opacity: 0, filter: "blur(8px)", ease: "none" }, 0)
         .to(".hero-word-1", { yPercent: -180, opacity: 0, filter: "blur(12px)", ease: "none" }, 0)
         .to(".hero-word-2", { yPercent: -260, opacity: 0, filter: "blur(14px)", ease: "none" }, 0.05)
@@ -35,28 +35,10 @@ export function CinematicHero() {
         .fromTo(
           ".hero-tagline",
           { yPercent: 60, opacity: 0, filter: "blur(20px)", scale: 0.9 },
-          { yPercent: 0, opacity: 1, filter: "blur(0px)", scale: 1, ease: "power2.out", duration: 0.25 },
-          0.35,
+          { yPercent: 0, opacity: 1, filter: "blur(0px)", scale: 1, ease: "power2.out" },
+          0.4,
         )
-        // Exit fade starts WHILE tagline is still visible — simultaneous dissolve
-        .fromTo(".hero-exit-fade", { opacity: 0 }, { opacity: 1, ease: "power1.in", duration: 0.4 }, 0.55)
-        .to(".hero-tagline", { opacity: 0, filter: "blur(10px)", ease: "none", duration: 0.25 }, 0.65);
-
-      // Fade out the global cinematic-fx overlay so its bloom/grade don't bleed through the black transition
-      // Must use querySelector since cinematic-fx is outside the hero scope
-      const fxEl = document.querySelector(".cinematic-fx");
-      if (fxEl) {
-        gsap.to(fxEl, {
-          opacity: 0,
-          ease: "power1.in",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "+=180%",
-            scrub: 1,
-          },
-        });
-      }
+        .to(".hero-tagline", { opacity: 0, filter: "blur(10px)", ease: "none" }, 0.85);
     },
     { scope: root },
   );
@@ -104,9 +86,6 @@ export function CinematicHero() {
           Find the <span className="text-accent">gap</span>. Fix the system.
         </p>
       </div>
-
-      {/* Fade-to-black exit — fixed so it paints above cinematic-fx (z-60) */}
-      <div className="hero-exit-fade pointer-events-none fixed inset-0 z-[80] bg-black opacity-0" />
     </section>
   );
 }

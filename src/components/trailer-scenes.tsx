@@ -44,28 +44,9 @@ export function TrailerScenes() {
         },
       });
 
-      // initial state: all slides fully visible & stacked — we crossfade by fading
-      // the OUTGOING slide on top of the next one (which is already at opacity 1).
-      // This avoids the dark gap where both slides were partially transparent.
-      gsap.set(slides, { opacity: 1, zIndex: (i) => total - i });
-
-      // fade-in overlay: dissolves from black at the section entry
-      tl.fromTo(".trailer-entry-fade", { opacity: 1 }, { opacity: 0, ease: "power2.inOut", duration: 0.15 }, 0);
-
-      // Restore cinematic-fx overlay that was faded out during hero exit
-      const fxEl = document.querySelector(".cinematic-fx");
-      if (fxEl) {
-        gsap.fromTo(fxEl, { opacity: 0 }, {
-          opacity: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "+=20%",
-            scrub: 1,
-          },
-        });
-      }
+      // initial state: only first slide visible
+      gsap.set(slides, { opacity: 0 });
+      gsap.set(slides[0], { opacity: 1 });
 
       slides.forEach((slide, i) => {
         const img = slide.querySelector(".trailer-img");
@@ -74,10 +55,10 @@ export function TrailerScenes() {
         const body = slide.querySelector(".trailer-body");
         const num = slide.querySelector(".trailer-num");
 
-        // Slow cinematic Ken-Burns — keep scale high & y movement tiny so image always covers edges
-        tl.fromTo(img, { scale: 1.18, yPercent: 1.5 }, { scale: 1.3, yPercent: -1.5, ease: "none" }, i);
+        // Slow cinematic Ken-Burns across the full slide window
+        tl.fromTo(img, { scale: 1.08, yPercent: 4 }, { scale: 1.32, yPercent: -4, ease: "none" }, i);
 
-        // text in
+        // text in (slower, longer hold)
         tl.fromTo(
           [eyebrow, title, body, num],
           { y: 80, opacity: 0, filter: "blur(18px)" },
@@ -85,29 +66,15 @@ export function TrailerScenes() {
           i + 0.05,
         );
 
-        // text out + dip-to-black transition: outgoing fades to black FIRST,
-        // then a "black flash" overlay fades back out revealing next slide.
-        // This hides the fact that two very different photos are stacked.
+        // text out + crossfade (longer overlap, like a film dissolve)
         if (i < total - 1) {
           tl.to(
             [eyebrow, title, body, num],
-            { y: -60, opacity: 0, filter: "blur(14px)", stagger: 0.04, ease: "power2.in", duration: 0.35 },
-            i + 0.55,
+            { y: -80, opacity: 0, filter: "blur(14px)", stagger: 0.05, ease: "power2.in", duration: 0.35 },
+            i + 0.6,
           );
-          // outgoing image dips to black via its own dark veil + opacity
-          tl.to(slide, { opacity: 0, ease: "power2.in", duration: 0.45 }, i + 0.6);
-          // global blackout overlay (sits above everything during the dip)
-          tl.fromTo(
-            ".trailer-blackout",
-            { opacity: 0 },
-            { opacity: 1, ease: "power2.in", duration: 0.4 },
-            i + 0.65,
-          );
-          tl.to(
-            ".trailer-blackout",
-            { opacity: 0, ease: "power2.out", duration: 0.4 },
-            i + 1.05,
-          );
+          tl.to(slide, { opacity: 0, ease: "power1.inOut", duration: 0.5 }, i + 0.7);
+          tl.to(slides[i + 1], { opacity: 1, ease: "power1.inOut", duration: 0.5 }, i + 0.7);
         }
       });
 
@@ -144,6 +111,9 @@ export function TrailerScenes() {
               className="h-full w-full object-cover"
             />
           </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
+
           <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-20 lg:px-12 lg:pb-28">
             <p className="trailer-eyebrow text-xs uppercase tracking-[0.4em] text-accent will-change-transform">
               {s.eyebrow}
@@ -164,20 +134,10 @@ export function TrailerScenes() {
         </div>
       ))}
 
-      {/* Shared overlays — sit above all slides so they don't fade with the dissolve */}
-      <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-t from-background via-background/40 to-background/10" />
-      <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-background/60 via-transparent to-transparent" />
-
-      {/* Entry fade — fixed above cinematic-fx for clean dissolve from black */}
-      <div className="trailer-entry-fade pointer-events-none fixed inset-0 z-[80] bg-black" />
-
       {/* progress bar */}
       <div className="absolute inset-x-0 top-0 z-20 h-px bg-foreground/10">
         <div className="trailer-progress h-full origin-left scale-x-0 bg-accent" />
       </div>
-
-      {/* Blackout overlay — drives the dip-to-black between scenes */}
-      <div className="trailer-blackout pointer-events-none absolute inset-0 z-[15] bg-background opacity-0" />
 
       <div className="absolute bottom-6 right-6 z-20 lg:bottom-8 lg:right-12">
         <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Scroll ↓</p>
